@@ -1,0 +1,23 @@
+{
+  "name": "trabalho-ii",
+  "version": "1.0.0",
+  "description": "Trabalho II",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [
+    "javascript",
+    "Sequelize"
+  ],
+  "author": "Adriano Pereira",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "sequelize": "^6.25.5",
+    "sqlite3": "^5.1.2"
+  }
+}

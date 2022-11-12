@@ -1,0 +1,27 @@
+<%- include('./components/header.ejs')%>
+
+<div class="flex-container">
+    <div class="container">
+        <p class="h4 m-2">Acessar conta:</p>
+        <form class="py-3 col-4" action="/Users/loginAuth" method="post">
+            <div class="form-group">
+                <label>CPF (Somente números)</label>
+                <input type="text" maxlength='11' class="form-control" name="cpf" placeholder="Escreva seu CPF">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" maxlength='10' id="password" class="form-control" name="password"
+                    placeholder="Escreva sua senha">
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="mpassword" id="mpassword" onclick="mostrarPassword()">
+                <label>Mostrar Senha</label>
+            </div>
+
+            <button class="btn btn-outline-dark" type="submit">Entrar</button>
+        </form>
+    </div>
+</div>
+
+
+<%- include('./components/footer.ejs')%>
