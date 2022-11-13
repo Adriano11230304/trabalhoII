@@ -1,13 +1,14 @@
-const { verbose, Database } = require('sqlite3');
+const { Sequelize } = require('sequelize');
 
-verbose();
-
-const db = new Database('./src/persistencia/bancoPosts.db', (err) => {
-    if(err){
-        return console.log(err.message);
-    }else{
-        console.log('Conectado ao Banco de Dados.');
-    }
+const sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: './src/persistencia/bancoPosts.db'
 });
 
-module.exports = db;
+sequelize.authenticate().then(() => {
+        console.log('Connection has been established successfully.');
+    }).catch(error => {
+        console.log('Unable to connect to the database:', error);
+    });
+
+module.exports = sequelize;

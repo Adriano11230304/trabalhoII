@@ -6,8 +6,9 @@ DROP TABLE IF EXISTS comments;
 CREATE TABLE users(
     cpf VARCHAR(20) NOT NULL PRIMARY KEY,
     password VARCHAR(20) NOT NULL,
-    created_at date NOT NULL,
-    nome VARCHAR(30) NOT NULL
+    email VARCHAR(30) NOT NULL,
+    nome VARCHAR(30) NOT NULL,
+    created_at date NOT NULL
 );
 
 CREATE TABLE posts(
