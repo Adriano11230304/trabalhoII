@@ -2,11 +2,19 @@ const express = require('express');
 const path = require('path');
 const postRouter = require('./routes/postsRoutes');
 const userRouter = require('./routes/usersRoutes');
+const session = require('express-session');
 
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use(session({
+    secret: 'ssasvdfdbbdfvdvdfv',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }
+}))
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
