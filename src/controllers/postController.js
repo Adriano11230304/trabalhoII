@@ -1,9 +1,11 @@
-const Post = require('../models/Post');
+const { Post } = require('../models/Post');
 
 class PostController{
 
     async list(req, res) {
-        
+        const posts = await Post.findAll();
+        console.log({ posts });
+        res.end('tudo certo!');
     }
 
     addPost(req, res){

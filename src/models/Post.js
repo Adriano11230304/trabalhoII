@@ -1,6 +1,24 @@
+const { DataTypes } = require("sequelize");
+const sequelize = require('../persistencia/configDB');
+
+const Post = sequelize.define('Post', {
+    id:{
+        type: DataTypes.INTEGER,
+        primaryKey: true
+    } ,
+    title: DataTypes.STRING,
+    description: DataTypes.STRING,
+    author: DataTypes.STRING,
+    user_cpf: DataTypes.STRING,
+    created_at: DataTypes.INTEGER
+}, {
+    timestamps: false,
+    modelName: 'posts'
+});
+
+module.exports = { Post };
 
 
-class Post{
     
 
     /*getDateFormatter(){
@@ -14,6 +32,3 @@ class Post{
         const date = dia + ' de ' + mes + ' de ' + ano + ' ' + hora + ':' + minutos + ':' + segundos;
         return date;
     }*/
-}
-
-module.exports = Post;

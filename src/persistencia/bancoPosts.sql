@@ -1,7 +1,8 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS posts;
-DROP TABLE IF EXISTS images;
 DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS users;
+
+
 
 CREATE TABLE users(
     cpf VARCHAR(20) NOT NULL PRIMARY KEY,
@@ -19,6 +20,7 @@ CREATE TABLE posts(
     user_cpf VARCHAR(20) NOT NULL,
     url VARCHAR(300),
     created_at date NOT NULL,
+    updated_at date,
     FOREIGN KEY(user_cpf) references users(cpf)
 );
 
@@ -30,3 +32,7 @@ CREATE TABLE comments(
     FOREIGN KEY(user_cpf) references users(cpf),
     FOREIGN KEY(posts_id) references posts(id)
 );
+
+/*insert into users(cpf, password, email, nome, created_at) values('01757947078', '12345', 'adriano.al.pereira@gmail.com', 'Adriano Alvarenga Pereira', '2022-01-10 12:00:00');
+
+insert into posts(title, description, author, user_cpf, created_at) values('Teste 1', 'ddcds dscdsc sdcsd cdscsdc dscsd', 'Adriano Pereira', '01757947078', '2022-10-06 12:00:00');*/
