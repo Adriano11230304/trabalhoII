@@ -1,7 +1,14 @@
 <%- include('./components/header.ejs')%>
 
+<%if(locals.msg){%>
+    <p class="alert alert-success">
+        <%= msg%>
+    </p>
+    <%}%>
+
 <div class="flex-container">
     <div class="container">
+        
         <p class="h4 m-2">Acessar conta:</p>
         <form class="py-3 col-4" action="/users/userAuth" method="post">
             <div class="form-group">
@@ -17,7 +24,7 @@
                 <input type="checkbox" name="mpassword" id="mpassword" onclick="mostrarPassword()">
                 <label>Mostrar Senha</label>
             </div>
-            <a class="dropdown-item" href="#">Não possui um usuário? Cadastra-se </a>
+            <a class="dropdown-item" href="/users/add">Não possui um usuário? Cadastra-se </a>
             <button class="btn btn-outline-dark" type="submit">Entrar</button>
             
         </form>

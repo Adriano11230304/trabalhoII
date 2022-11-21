@@ -9,7 +9,9 @@ CREATE TABLE users(
     password VARCHAR(20) NOT NULL,
     email VARCHAR(30) NOT NULL,
     nome VARCHAR(30) NOT NULL,
-    created_at date NOT NULL
+    role VARCHAR(30) NOT NULL,
+    createdAt DATE NOT NULL,
+    updatedAt DATE
 );
 
 CREATE TABLE posts(
@@ -33,6 +35,6 @@ CREATE TABLE comments(
     FOREIGN KEY(posts_id) references posts(id)
 );
 
-/*insert into users(cpf, password, email, nome, created_at) values('01757947078', '12345', 'adriano.al.pereira@gmail.com', 'Adriano Alvarenga Pereira', '2022-01-10 12:00:00');
+insert into users(cpf, password, email, nome, role, createdAt, updatedAt) values('01757947078', '12345', 'adriano.al.pereira@gmail.com', 'Adriano Alvarenga Pereira', 'admin', '2022-01-10 12:00:00', null);
 
-insert into posts(title, description, author, user_cpf, created_at) values('Teste 1', 'ddcds dscdsc sdcsd cdscsdc dscsd', 'Adriano Pereira', '01757947078', '2022-10-06 12:00:00');*/
+insert into posts(title, description, author, user_cpf, created_at) values('Teste 1', 'ddcds dscdsc sdcsd cdscsdc dscsd', 'Adriano Pereira', '01757947078', '2022-10-06 12:00:00');
