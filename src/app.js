@@ -26,6 +26,7 @@ app.use(express.static('src/public'));
 
 const source = (req, res) => {
     res.render('index');
+    req.session.user = undefined;
 }
 
 app.get('/', source);

@@ -1,4 +1,8 @@
-<%- include('../components/headerLogado.ejs')%>
+<%if(locals.user.role == 'admin'){%>
+    <%- include('../components/headerLogadoAdmin.ejs')%>
+<%}else{%>
+    <%- include('../components/headerLogado.ejs')%>
+<%}%>   
 
 <%for(let i=0; i < posts.length; i++){%>
     <%=posts[i].id%>
