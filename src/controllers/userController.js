@@ -5,7 +5,9 @@ const { role } = require('./role');
 class UserController{
     async userAuth(req, res) {
         const posts = await Post.findAll();
+        console.log(posts);
         const users = await User.findAll();
+        console.log(users);
         users.forEach(user => {
             if (user.cpf == req.body.cpf && user.password == req.body.password) {
                 req.session.user = user;
