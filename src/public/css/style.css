@@ -76,6 +76,15 @@
     width: 100%;
 }
 
+.menu{
+    background-color: #343a40;
+}
+
+#logout{
+    display: block !important;
+    float: right !important;
+}
+
 :root {
     --blue: #007bff;
     --indigo: #6610f2;
@@ -4282,6 +4291,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     align-items: center;
     -ms-flex-pack: justify;
     justify-content: space-between;
+    height: 50px;
     padding: .5rem 1rem
 }
 

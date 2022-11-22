@@ -11,3 +11,8 @@
             <h3>Blog Trabalho I - WEB II</h3>
         </div>
     </div>
+    <%if(locals.msg){%>
+        <p class="alert alert-danger">
+            <%= msg%>
+        </p>
+        <%}%>

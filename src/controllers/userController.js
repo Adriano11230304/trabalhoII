@@ -25,7 +25,7 @@ class UserController{
         res.render('users/add');
     }
 
-    async addPost(req, res){
+    async addUser(req, res){
         const user = await User.create({
             cpf: req.body.cpf,
             email: req.body.email,
@@ -36,6 +36,12 @@ class UserController{
         console.log({user});
         let msg = 'Usuário cadastrado!';
         
+        res.render('index', { msg });
+    }
+
+    logout(req, res){
+        req.session.user = null;
+        const msg = 'Você foi deslogado!';
         res.render('index', { msg });
     }
 }

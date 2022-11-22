@@ -1,12 +1,12 @@
 const express = require('express');
-
+const { isAuth } = require('../middlewares/isAuth');
 const userRouter = express.Router();
-
 const UserController = require('../controllers/userController');
 const userController = new UserController;
 
 userRouter.post('/userAuth', userController.userAuth);
 userRouter.get('/add', userController.add);
-userRouter.post('/add', userController.addPost);
+userRouter.post('/add', userController.addUser);
+userRouter.get('/logout', isAuth, userController.logout);
 
 module.exports = userRouter;
