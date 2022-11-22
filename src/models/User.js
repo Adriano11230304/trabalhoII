@@ -9,12 +9,12 @@ const User = sequelize.define('User', {
     password: DataTypes.STRING,
     email: DataTypes.STRING,
     nome: DataTypes.STRING,
-    role: DataTypes.STRING,
-    createdAt: DataTypes.INTEGER,
-    updatedAt: DataTypes.INTEGER
+    role: DataTypes.STRING
 }, {
     timestamps: true,
     modelName: 'users'
 });
+
+// User.sync({ force: true });
 
 module.exports = { User };
