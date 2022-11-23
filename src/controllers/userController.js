@@ -47,6 +47,10 @@ class UserController{
         const msg = 'Você foi deslogado!';
         res.render('index', { msg });
     }
+
+    delete(req, res){
+        res.end('ok');
+    }
 }
 
 module.exports = UserController;
