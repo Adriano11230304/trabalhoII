@@ -7,6 +7,7 @@ class PostController{
         const user = req.session.user;
         let msg = req.session.msg;
         req.session.msg = undefined;
+        let teste = 'teste';
         res.render('posts/index', { posts, msg, user });        
     }
 
