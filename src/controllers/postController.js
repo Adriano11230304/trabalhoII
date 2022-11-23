@@ -4,10 +4,10 @@ class PostController{
 
     async list(req, res) {
         const posts = await Post.findAll();
-        const user = req.session.user;
+        console.log(req.session.user);
         let msg = req.session.msg;
         req.session.msg = undefined;
-        res.render('posts/list', { posts, user, msg });        
+        res.render('posts/index', { posts, msg });        
     }
 
     addPost(req, res){

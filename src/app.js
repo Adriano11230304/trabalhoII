@@ -24,12 +24,9 @@ app.use('/users', userRouter);
 
 app.use(express.static('src/public'));
 
-const source = (req, res) => {
-    res.render('index');
-    req.session.user = undefined;
-}
-
-app.get('/', source);
+app.get('/', (req, res) => {
+    res.redirect('/posts');
+});
 
 const server = () => {
     console.log("Servidor rodando na porta 3000!!!");

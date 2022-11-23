@@ -1,0 +1,6 @@
+<%- include('../components/headerAdmin.ejs')%>
+    <p>Estamos listando os usuários</p>
+    <%for(let i = 0; i < users.length; i++){%>
+        <%=users[i].cpf%>
+    <%}%>
+<%- include('../components/footer.ejs')%>

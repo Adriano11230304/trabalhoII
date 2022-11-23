@@ -17,10 +17,10 @@ class UserController{
             const user = req.session.user;
             const msg = 'Usuário Logado!';
 
-            res.render('posts/list', { msg, user, posts });
+            res.render('posts/index', { msg, user, posts });
         }else{
             const msg = 'Usuário não está cadastrado!';
-            res.render('index', { msg });
+            res.render('users/login', { msg });
         }
     }
 
@@ -36,20 +36,30 @@ class UserController{
             password: req.body.password,
             role: role.regular
         });
-        console.log({user});
         let msg = 'Usuário cadastrado!';
         
-        res.render('index', { msg });
+        res.render('users/login', { msg });
     }
 
     logout(req, res){
         req.session.user = undefined;
         const msg = 'Você foi deslogado!';
-        res.render('index', { msg });
+        res.render('users/login', { msg });
     }
 
     delete(req, res){
         res.end('ok');
+    }
+
+    async list(req, res){
+        const users = await User.findAll();
+        
+        res.render('users/list', { users });
+    }
+
+    login(req, res) {
+
+        res.render('users/login');
     }
 }
 

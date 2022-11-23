@@ -1,5 +1,5 @@
 const express = require('express');
-const { isAuth } = require('../middlewares/isAuth');
+const { isAuth } = require('../middlewares/middlewares');
 
 const postRouter = express.Router();
 
@@ -15,6 +15,6 @@ postRouter.post('/:id', postController.update);
 postRouter.post('/', postController.add);
 postRouter.get('/:page', postController.list);*/
 
-postRouter.get('/', isAuth, postController.list);
+postRouter.get('/', postController.list);
 
 module.exports = postRouter;
