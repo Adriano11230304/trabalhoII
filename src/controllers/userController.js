@@ -25,20 +25,32 @@ class UserController{
     }
 
     add(req, res){
-        res.render('users/add');
+        const user = req.session.user;
+        res.render('users/add', { user });
     }
 
     async addUser(req, res){
-        const user = await User.create({
+        let permissao;
+        if(req.body.role){
+            if(req.body.role == 'admin'){
+                permissao = role.admin;
+            }else{
+                permissao = role.regular;    
+            }
+        }else{
+            permissao = role.regular;
+        }
+        await User.create({
             cpf: req.body.cpf,
             email: req.body.email,
             nome: req.body.nome,
             password: req.body.password,
-            role: role.regular
+            role: permissao
         });
-        let msg = 'Usuário cadastrado!';
+        req.session.msg = 'Usuário cadastrado!';
+
+        res.redirect('/posts');
         
-        res.render('users/login', { msg });
     }
 
     logout(req, res){
@@ -48,11 +60,21 @@ class UserController{
     }
 
     delete(req, res){
+        const cpfs = req.body;
+        cpfs.forEach(async cpf => {
+            await User.destroy({
+                where:{
+                    cpf: cpf
+                }
+            })
+        })
         res.end('ok');
     }
 
-    deletesuccess(req, res){
-        res.end('OK');
+    async deletesuccess(req, res){
+        const msg = 'Usuários excluídos com sucesso!';
+        const users = await User.findAll();
+        res.render('users/list', { msg, users });
     }
 
     async list(req, res){
