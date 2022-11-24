@@ -40,16 +40,23 @@ class UserController{
         }else{
             permissao = role.regular;
         }
-        await User.create({
-            cpf: req.body.cpf,
-            email: req.body.email,
-            nome: req.body.nome,
-            password: req.body.password,
-            role: permissao
-        });
-        req.session.msg = 'Usuário cadastrado!';
+        if(req.body.nome && req.body.password && req.body.cpf && req.body.email){
+            await User.create({
+                cpf: req.body.cpf,
+                email: req.body.email,
+                nome: req.body.nome,
+                password: req.body.password,
+                role: permissao
+            });
+            req.session.msg = 'Usuário cadastrado!';
 
-        res.redirect('/posts');
+            res.redirect('/posts');
+        }else{
+            req.session.msg = 'Campos inválidos!';
+
+            res.redirect('/posts');
+        }
+        
         
     }
 

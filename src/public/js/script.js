@@ -51,3 +51,31 @@ async function deleteUsers(){
         }
     }
 }
+
+function validation(){
+    const cpf = document.querySelector('#cpf');
+    const nome = document.querySelector('#nome');
+    const password = document.querySelector('#password');
+    const email = document.querySelector('#email');
+    console.log(cpf.value.length);
+    if(cpf.value == "" || cpf.value.length != 11){
+        alert('Você precisa preencher um CPF válido!');
+        cpf.focus();
+        return false;
+    }else if(nome.value == ''){
+        alert('Campo nome não pode ser vazio!');
+        nome.focus();
+        return false;
+    }else if(password.value == ''){
+        alert('Campo password não pode ser vazio!');
+        password.focus();
+        return false;
+    }else if(email.value == ''){
+        alert('Campo email não pode ser vazio!');
+        email.focus();
+        return false;
+    
+    }else{
+        return true;
+    }
+}
