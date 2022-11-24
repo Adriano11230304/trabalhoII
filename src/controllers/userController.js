@@ -19,7 +19,7 @@ class UserController{
 
             res.render('posts/index', { msg, user, posts });
         }else{
-            const msg = 'Usuário não está cadastrado!';
+            const msg = 'CPF ou password inválido!';
             res.render('users/login', { msg });
         }
     }
@@ -51,6 +51,10 @@ class UserController{
         res.end('ok');
     }
 
+    deletesuccess(req, res){
+        res.end('OK');
+    }
+
     async list(req, res){
         const users = await User.findAll();
         
@@ -58,7 +62,7 @@ class UserController{
     }
 
     login(req, res) {
-
+        req.session.user = undefined;
         res.render('users/login');
     }
 }

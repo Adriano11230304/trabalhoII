@@ -1,6 +1,43 @@
 <%- include('../components/headerAdmin.ejs')%>
-    <p>Estamos listando os usuários</p>
-    <%for(let i = 0; i < users.length; i++){%>
-        <%=users[i].cpf%>
-    <%}%>
+    <div class="container">
+        <h3 class="m-2">Usuários</h3>
+        <div class="flex-container">
+            <a class="btn btn-light px-1" href="/users/add">
+                <img src="/img/adicionar.png" width="25" height="25" alt="Adicionar um novo usuário" title="Adicionar um novo usuário">
+            </a>
+            <a class="btn btn-light px-1" onclick="return deleteUsers()">
+                <img src="/img/excluir.png" width="25" height="25" title="Excluir os usuários selecionados" alt="Excluir usuários">
+            </a>
+        </div>
+        <div class="flex-container">
+            <table class="table table-hover m-2">
+                <thead class="thead-dark text-md-center">
+                    <tr>
+                        <th>
+                            <input type="checkbox" name="selecionar" id="selectAll" onclick="return selectAll()">
+                        </th>
+                        <th>CPF</th>
+                        <th>Password</th>
+                        <th>E-mail</th>
+                        <th>Nome</th>
+                        <th>Permissão</th>
+                    </tr>
+                </thead>
+                <tbody class="text-md-center">
+                        <%for(let i=0; i < users.length; i++){%>
+                            <tr>
+                                <td><input type="checkbox" value="<%=users[i].cpf%>" name="usercpf" id="usercpf"></td>
+                                <td><%=users[i].cpf%></td>
+                                <td><%=users[i].password%></td>
+                                <td><%=users[i].email%></td>
+                                <td><%=users[i].nome%></td>
+                                <td><%=users[i].role%></td>
+                            </tr>
+                        <%}%>
+                </tbody>
+            </table>
+        </div>
+    </div>    
+
+    
 <%- include('../components/footer.ejs')%>
