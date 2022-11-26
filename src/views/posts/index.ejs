@@ -8,9 +8,48 @@
     <%- include('../components/header.ejs')%>
 <%}%>   
 
-<%for(let i=0; i < posts.length; i++){%>
-    <%=posts[i].id%>
-<%}%>
+<div class="container">
+    <%if(posts.length==0){%>
+        <h3>Nenhum Post encontrado!</h3>
+    <%}else{%>
+        <%for(let i=0; i < posts.length; i++){%>
+            <hr class="border border-dark border-2 opacity-50">
+            <h6 class="m-2">
+                <%=posts[i].created_at%>
+            </h6>
+            <hr class="border border-dark border-2 opacity-50">
+            <div class="flex-container m-2">
+                <h3>
+                    <%=posts[i].title%>
+                </h3>
+            </div>
+            <div class="flex-container m-2">
+                <a class="btn btn-outline-dark m-2" href="/posts/add-post">
+                    <img src="/img/adicionar.png" title="Inserir um novo Post" width="25" height="25">
+                </a>
+                <a class="btn btn-outline-dark m-2" href="/posts/update/<%=posts[i].id%>">
+                    <img src="/img/editar.png" title="Alterar o Post" width="25" height="25">
+                </a>
+                <a class="btn btn-outline-dark m-2" href="/posts/delete/<%=posts[i].id%>">
+                    <img src="/img/excluir.png" title="Excluir o Post" width="25" height="25">
+                </a>
+                <a class="btn btn-outline-dark m-2" href="/posts/posts/<%=posts[i].id%>">
+                    <img src="/img/visualizar.png" title="Visualizar o Post" width="25" height="25">
+                </a>
+                <a class="btn btn-outline-dark m-2" href="/posts/images/add/<%=posts[i].id%>">
+                    <img src="/img/imagem.png" title="Inserir imagem a esse Post" width="25" height="25">
+                </a>
+            </div>
+
+            <div class="flex-container m-2">
+                <p class="text-justify">
+                    <%=posts[i].description%>
+                </p>
+            </div>
+        <%}%>
+    <%}%>
+</div>
+
 
 
 <%- include('../components/footer.ejs')%>

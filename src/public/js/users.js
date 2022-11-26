@@ -74,8 +74,19 @@ function validation(){
         alert('Campo email não pode ser vazio!');
         email.focus();
         return false;
-    
     }else{
         return true;
     }
+}
+
+function selectAll(){
+    const checks = document.querySelectorAll('#usercpf');
+    const selectAll = document.querySelector('#selectAll');
+    checks.forEach(check => {
+        if(selectAll.checked){
+            check.checked = true;
+        }else{
+            check.checked = false;
+        }
+    })
 }
