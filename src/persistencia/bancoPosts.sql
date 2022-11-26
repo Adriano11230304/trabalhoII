@@ -35,6 +35,6 @@ CREATE TABLE comments(
     FOREIGN KEY(posts_id) references posts(id)
 );
 
-insert into users(cpf, password, email, nome, role, createdAt, updatedAt) values('01757947078', '12345', 'adriano.al.pereira@gmail.com', 'Adriano Alvarenga Pereira', 'admin', '2022-01-10 12:00:00', null);
+insert into users(cpf, password, email, nome, role, createdAt, updatedAt) values('01757947078', '12345', 'adriano.al.pereira@gmail.com', 'Adriano Alvarenga Pereira', 'admin', '2022-01-10 12:00:00', '2022-01-10 12:00:00');
 
-insert into posts(title, description, author, user_cpf, created_at) values('Teste 1', 'ddcds dscdsc sdcsd cdscsdc dscsd', 'Adriano Pereira', '01757947078', '2022-10-06 12:00:00');
+insert into posts(title, description, author, createdAt, updatedAt, UserCpf) values('Teste 1', 'ddcds dscdsc sdcsd cdscsdc dscsd', 'Adriano Pereira', '01757947078', '2022-10-06 12:00:00', '2022-10-06 12:00:00', '01757947078');

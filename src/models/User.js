@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require('../persistencia/configDB');
+const Post = require('./Post');
 
 const User = sequelize.define('User', {
     cpf: {
@@ -27,7 +28,5 @@ const User = sequelize.define('User', {
     timestamps: true,
     modelName: 'users'
 });
-
-// User.sync({ force: true });
 
 module.exports = { User };

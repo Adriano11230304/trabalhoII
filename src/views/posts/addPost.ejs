@@ -1,0 +1,27 @@
+<%-include('../components/header.ejs')%>
+
+<div class="container">
+    <form class="py-3 col-10" action="/posts" method="post">
+        <input type="hidden" name="user" value="<%=user%>">
+        <div class="form-group">
+            <label>Título</label>
+            <input type="text" class="form-control" name="title" placeholder="Escreva o título do Post aqui">
+        </div>
+        <div class="form-group">
+            <label>Texto</label>
+            <textarea class="form-control" name="description" placeholder="Escreva o texto do Post aqui"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Autor</label>
+            <input type="text" class="form-control" name="author" placeholder="Escreva o seu nome aqui">
+        </div>
+        <div class="form-group">
+            <label>URL da imagem</label>
+            <input type="text" class="form-control" name="url" placeholder="Escreva a URL da imagem aqui">
+        </div>
+        <button class="btn btn-outline-primary">Cadastrar Post</button>
+    </form>
+</div>
+    
+
+    <%-include('../components/footer.ejs')%>

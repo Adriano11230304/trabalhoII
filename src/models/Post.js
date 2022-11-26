@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require('../persistencia/configDB');
+const { User } = require('./User');
 
 const Post = sequelize.define('Post', {
     id:{
@@ -9,10 +10,9 @@ const Post = sequelize.define('Post', {
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     author: DataTypes.STRING,
-    user_cpf: DataTypes.STRING,
-    created_at: DataTypes.INTEGER
+    imageURL: DataTypes.STRING
 }, {
-    timestamps: false,
+    timestamps: true,
     modelName: 'posts'
 });
 

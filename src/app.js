@@ -3,6 +3,7 @@ const path = require('path');
 const postRouter = require('./routes/postsRoutes');
 const userRouter = require('./routes/usersRoutes');
 const session = require('express-session');
+const dbSync = require('./models/sync');
 
 const app = express();
 
