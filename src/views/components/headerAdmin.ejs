@@ -52,3 +52,10 @@
         </p>
     <%}%>
     <p id="msg"></p>
+    <%if(locals.msgs){%>
+        <%for(let i=0; i < msgs.length; i++){%>
+            <p class="alert alert-danger">
+                <%=msgs[i]%>
+            </p>
+        <%}%>
+    <%}%>

@@ -52,7 +52,7 @@ async function deleteUsers(){
     }
 }
 
-function validation(){
+/*function validation(){
     const cpf = document.querySelector('#cpf');
     const nome = document.querySelector('#nome');
     const password = document.querySelector('#password');
@@ -77,7 +77,7 @@ function validation(){
     }else{
         return true;
     }
-}
+}*/
 
 function selectAll(){
     const checks = document.querySelectorAll('#usercpf');

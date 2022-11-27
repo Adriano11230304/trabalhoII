@@ -13,7 +13,7 @@ postRouter.post('/:id', postController.update);
 postRouter.post('/', postController.add);
 postRouter.get('/:page', postController.list);*/
 postRouter.get('/add-post', isAuth, postController.addPost);
-postRouter.get('/:id', isAuth, postController.postDetails);
+postRouter.get('/details/:id', isAuth, postController.postDetails);
 postRouter.get('/', postController.list);
 postRouter.post('/', isAuth, postController.add);
 postRouter.get('/delete/:id', isAuth, isAuthorPost, postController.remove);

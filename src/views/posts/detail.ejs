@@ -26,16 +26,28 @@
         <a class="btn btn-outline-dark m-2" href="/posts/delete/<%=post.id%>">
             <img src="/img/excluir.png" title="Excluir o Post" width="25" height="25">
         </a>
+        <a class="btn btn-outline-dark m-2" href="#">
+            <img src="/img/like1.png" title="Curtir Post" width="25" height="25">
+        </a>
+        <a class="btn btn-outline-dark m-2" href="#">
+            <img src="/img/comentarios.png" title="Comentários do Post" width="25" height="25">
+        </a>
     </div>
     <div class="flex-container m-2">
-        <p class="text-justify">
+        <h6 class="h5 text-justify">
             <%=post.description%>
-        </p>
+        </h6>
     </div>
+    <br/>
     <div class="text-center">
         <%if(post.imageURL){%>
             <img src="<%=post.imageURL%>" alt="Imagem do Post" width="350" height="250">
         <%}%>
+    </div>
+    <div class="flex-container m-2">
+        <p class="text-justify">
+            Post criado por <%=userCreate.nome%>
+        </p>
     </div>
     <br/>
     <hr class="border border-dark border-2 opacity-50">

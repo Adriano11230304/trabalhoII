@@ -1,6 +1,7 @@
 const { User } = require('../models/User');
 const { Post } = require('../models/Post');
 const { role } = require('./role');
+const validate = require('./validators');
 
 class UserController{
     async userAuth(req, res) {
@@ -40,7 +41,21 @@ class UserController{
         }else{
             permissao = role.regular;
         }
-        if(req.body.nome && req.body.password && req.body.cpf && req.body.email){
+
+        const { nome, password, email, cpf } = req.body;
+        const validateUser = {
+            nome, password, email, cpf
+        };
+
+        const errors = validate(validateUser);
+        if(errors){
+            const msgs = [];
+            errors.details.forEach(error => {
+                msgs.push(error.message);
+            })
+            req.session.msgs = msgs;
+            res.redirect('/posts');
+        }else{
             await User.create({
                 cpf: req.body.cpf,
                 email: req.body.email,
@@ -51,13 +66,7 @@ class UserController{
             req.session.msg = 'Usuário cadastrado!';
 
             res.redirect('/posts');
-        }else{
-            req.session.msg = 'Campos inválidos!';
-
-            res.redirect('/posts');
         }
-        
-        
     }
 
     logout(req, res){

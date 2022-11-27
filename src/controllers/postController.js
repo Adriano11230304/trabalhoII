@@ -1,4 +1,5 @@
 const { Post } = require('../models/Post');
+const { User } = require('../models/User');
 
 class PostController{
 
@@ -12,7 +13,10 @@ class PostController{
         const user = req.session.user;
         let msg = req.session.msg;
         req.session.msg = undefined;
-        res.render('posts/index', { posts, msg, user });        
+        let msgs = req.session.msgs;
+        console.log(msgs);
+        req.session.msgs = undefined;
+        res.render('posts/index', { posts, msg, user, msgs });        
     }
 
     addPost(req, res){
@@ -30,7 +34,6 @@ class PostController{
             UserCpf: req.session.user.cpf,
             title: req.body.title,
             description: req.body.description,
-            author: req.session.user.nome,
             imageURL: url
         })
         res.redirect('/posts');
@@ -77,8 +80,14 @@ class PostController{
                 id: req.params.id
             }
         })
+        const user = req.session.user;
+        const userCreate = await User.findOne({
+            where: {
+                cpf: post.UserCpf
+            }
+        })
 
-        res.render('posts/detail', { post });
+        res.render('posts/detail', { post, user, userCreate });
     }
     
 };
