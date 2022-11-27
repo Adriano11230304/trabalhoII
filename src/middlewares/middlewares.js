@@ -1,3 +1,5 @@
+const { Post } = require("../models/Post");
+
 isAuth = (req, res, next) => {
     if (req.session.user){
         next();
@@ -16,4 +18,18 @@ isAdmin = (req, res, next) => {
     }
 }
 
-module.exports = { isAuth, isAdmin };
+isAuthorPost = async (req, res, next) => {
+    const post = await Post.findOne({
+        where:{
+            id: req.params.id
+        }
+    })
+    if(post.UserCpf == req.session.user.cpf){
+        next();
+    }else{
+        req.session.msg = 'Você não poderá alterar ou excluir um Post que não é seu!';
+        res.redirect('/');
+    }
+}
+
+module.exports = { isAuth, isAdmin, isAuthorPost };

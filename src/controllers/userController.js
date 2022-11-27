@@ -92,6 +92,7 @@ class UserController{
 
     login(req, res) {
         req.session.user = undefined;
+        req.session.msg = undefined;
         res.render('users/login');
     }
 }

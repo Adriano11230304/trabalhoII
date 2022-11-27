@@ -1,0 +1,47 @@
+<%if(locals.user){%>
+    <%if(locals.user.role=='admin' ){%>
+        <%- include('../components/headerAdmin.ejs')%>
+    <%}else{%>
+        <%- include('../components/headerLogado.ejs')%>
+    <%}%>
+<%}else{%>
+    <%- include('../components/header.ejs')%>
+<%}%>
+
+<div class="container">
+    <hr class="border border-dark border-2 opacity-50">
+        <h6 class="m-2">
+            <%=post.createdAt%>
+        </h6>
+    <hr class="border border-dark border-2 opacity-50">
+    <div class="flex-container m-2">
+        <h3>
+            <%=post.title%>
+        </h3>
+    </div>
+    <div class="flex-container m-2">
+        <a class="btn btn-outline-dark m-2" href="/posts/update/<%=post.id%>">
+            <img src="/img/editar.png" title="Alterar o Post" width="25" height="25">
+        </a>
+        <a class="btn btn-outline-dark m-2" href="/posts/delete/<%=post.id%>">
+            <img src="/img/excluir.png" title="Excluir o Post" width="25" height="25">
+        </a>
+    </div>
+    <div class="flex-container m-2">
+        <p class="text-justify">
+            <%=post.description%>
+        </p>
+    </div>
+    <div class="text-center">
+        <%if(post.imageURL){%>
+            <img src="<%=post.imageURL%>" alt="Imagem do Post" width="350" height="250">
+        <%}%>
+    </div>
+    <br/>
+    <hr class="border border-dark border-2 opacity-50">
+        <h5 class="font-weight-bold">Comentários do Post:</h5>
+    <hr class="border border-dark border-2 opacity-50">
+</div>
+
+
+<%- include('../components/footer.ejs')%>

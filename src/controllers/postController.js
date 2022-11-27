@@ -3,11 +3,15 @@ const { Post } = require('../models/Post');
 class PostController{
 
     async list(req, res) {
-        const posts = await Post.findAll();
+        const posts = await Post.findAll({
+            order: [
+                ['createdAt', 'DESC']
+            ]
+        });
+        console.log(posts);
         const user = req.session.user;
         let msg = req.session.msg;
         req.session.msg = undefined;
-        let teste = 'teste';
         res.render('posts/index', { posts, msg, user });        
     }
 
@@ -23,10 +27,10 @@ class PostController{
             url = req.body.url;
         };
         await Post.create({
-            UserCpf: req.body.user,
+            UserCpf: req.session.user.cpf,
             title: req.body.title,
             description: req.body.description,
-            author: req.body.author,
+            author: req.session.user.nome,
             imageURL: url
         })
         res.redirect('/posts');
@@ -43,15 +47,38 @@ class PostController{
     }
 
     async updateForm(req, res){
+        console.log(req.params.id);
+        const post = await Post.findOne({
+            where: {
+                id: req.params.id
+            }
+        });
         
+        res.render('posts/updateForm', { post });
     }
 
-    update(req,res){
-
+    async update(req,res){
+        await Post.update({
+            title: req.body.title,
+            description: req.body.description,
+            imageURL: req.body.imageURL
+        },{
+            where: {
+                id: req.body.id
+            }
+        })
+        req.session.msg = 'Post alterado com sucesso!';
+        res.redirect('/posts');
     }
 
     async postDetails(req, res){
-        
+        const post = await Post.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+
+        res.render('posts/detail', { post });
     }
     
 };
