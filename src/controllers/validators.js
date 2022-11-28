@@ -37,9 +37,8 @@ const schemaPost = Joi.object({
         "string.max": "Título deve ter no máximo 30 caracteres",
         "string.empty": "Título não informado"
     }),
-    description: Joi.string().min(3).max(250).required().messages({
+    description: Joi.string().min(3).required().messages({
         "string.min": "Texto do Post deve ter pelo menos 3 caracteres",
-        "string.max": "Texto do Post deve ter no máximo 250 caracteres",
         "string.empty": "Texto do Post não informado"
     })
 })

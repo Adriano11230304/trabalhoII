@@ -10,7 +10,6 @@ class PostController{
                 ['createdAt', 'DESC']
             ]
         });
-        console.log(posts);
         const user = req.session.user;
         let msg = req.session.msg;
         req.session.msg = undefined;
@@ -25,7 +24,6 @@ class PostController{
     }
 
     async add(req, res){
-        console.log(req.body.user);
         let url = undefined;
         if (req.body.url.includes('jpg') || req.body.url.includes('png') || req.body.url.includes('jpeg')){
             url = req.body.url;
@@ -62,7 +60,6 @@ class PostController{
     }
 
     async updateForm(req, res){
-        console.log(req.params.id);
         const post = await Post.findOne({
             where: {
                 id: req.params.id
