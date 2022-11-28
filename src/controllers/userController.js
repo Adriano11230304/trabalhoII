@@ -1,7 +1,7 @@
 const { User } = require('../models/User');
 const { Post } = require('../models/Post');
 const { role } = require('./role');
-const validate = require('./validators');
+const { validate }  = require('./validators');
 
 class UserController{
     async userAuth(req, res) {
@@ -57,10 +57,10 @@ class UserController{
             res.redirect('/posts');
         }else{
             await User.create({
-                cpf: req.body.cpf,
-                email: req.body.email,
-                nome: req.body.nome,
-                password: req.body.password,
+                cpf: cpf,
+                email: email,
+                nome: nome,
+                password: password,
                 role: permissao
             });
             req.session.msg = 'Usuário cadastrado!';
@@ -78,12 +78,15 @@ class UserController{
     delete(req, res){
         const cpfs = req.body;
         cpfs.forEach(async cpf => {
-            await User.destroy({
+            const user = await User.destroy({
                 where:{
                     cpf: cpf
                 }
             })
+            console.log(user);
+
         })
+        
         res.end('ok');
     }
 

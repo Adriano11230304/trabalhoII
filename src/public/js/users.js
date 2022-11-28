@@ -38,9 +38,9 @@ async function deleteUsers(){
         msg.innerText = '';
         msg.innerText = 'Nenhum usuário escolhido.';
     }else{
-        const resposta = await fetch('users/delete', params);
+        const resposta = await fetch('/users/delete', params);
         if(resposta.ok){
-            window.location.href = 'users/deletesuccess';
+            window.location.href = '/users/deletesuccess';
         }else{
             msg.classList.remove('alert');
             msg.classList.remove('alert-success');

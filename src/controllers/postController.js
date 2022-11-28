@@ -1,5 +1,6 @@
 const { Post } = require('../models/Post');
 const { User } = require('../models/User');
+const { validatePost } = require('./validators');
 
 class PostController{
 
@@ -14,7 +15,6 @@ class PostController{
         let msg = req.session.msg;
         req.session.msg = undefined;
         let msgs = req.session.msgs;
-        console.log(msgs);
         req.session.msgs = undefined;
         res.render('posts/index', { posts, msg, user, msgs });        
     }
@@ -30,13 +30,25 @@ class PostController{
         if (req.body.url.includes('jpg') || req.body.url.includes('png') || req.body.url.includes('jpeg')){
             url = req.body.url;
         };
-        await Post.create({
-            UserCpf: req.session.user.cpf,
-            title: req.body.title,
-            description: req.body.description,
-            imageURL: url
-        })
-        res.redirect('/posts');
+        const { title, description} = req.body;
+        const validatePosts = {title, description};
+        const errors = validatePost(validatePosts);
+        if (errors) {
+            const msgs = [];
+            errors.details.forEach(error => {
+                msgs.push(error.message);
+            })
+            req.session.msgs = msgs;
+            res.redirect('/posts');
+        } else {
+            await Post.create({
+                UserCpf: req.session.user.cpf,
+                title: req.body.title,
+                description: req.body.description,
+                imageURL: url
+            })
+            res.redirect('/posts');
+        }
     }
 
     remove(req, res){
