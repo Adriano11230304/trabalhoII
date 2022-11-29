@@ -5,7 +5,12 @@ const { validate }  = require('./validators');
 
 class UserController{
     async userAuth(req, res) {
-        const posts = await Post.findAll();
+        const posts = await Post.findAll({
+            order: [
+                ['createdAt', 'DESC']
+            ],
+            limit: 5
+        });
         const users = await User.findAll();
         let userExist = false;
         users.forEach(user => {

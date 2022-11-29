@@ -6,18 +6,22 @@ class PostController{
 
     async list(req, res) {
         const posts = await Post.findAll({
-            limit: 5,
-            offset: 0,
+            order: [
+                ['createdAt', 'DESC']
+            ],
+            limit: 5
+        });
+        const totalPosts = await Post.findAll({
             order: [
                 ['createdAt', 'DESC']
             ]
-        });
+        })
         const user = req.session.user;
         let msg = req.session.msg;
         req.session.msg = undefined;
         let msgs = req.session.msgs;
         req.session.msgs = undefined;
-        res.render('posts/index', { posts, msg, user, msgs });        
+        res.render('posts/index', { posts, totalPosts, msg, user, msgs });        
     }
 
     addPost(req, res){
@@ -30,6 +34,7 @@ class PostController{
         if (req.body.url.includes('jpg') || req.body.url.includes('png') || req.body.url.includes('jpeg')){
             url = req.body.url;
         };
+        console.log(url);
         const { title, description} = req.body;
         const validatePosts = {title, description};
         const errors = validatePost(validatePosts);
@@ -75,7 +80,7 @@ class PostController{
         await Post.update({
             title: req.body.title,
             description: req.body.description,
-            imageURL: req.body.imageURL
+            imageURL: req.body.url
         },{
             where: {
                 id: req.body.id
