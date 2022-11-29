@@ -15,10 +15,12 @@ postRouter.get('/:page', postController.list);*/
 postRouter.get('/add-post', isAuth, postController.addPost);
 postRouter.get('/details/:id', isAuth, postController.postDetails);
 postRouter.get('/', postController.list);
+postRouter.get('/:page', postController.list);
 postRouter.post('/', isAuth, postController.add);
 postRouter.get('/delete/:id', isAuth, isAuthorPost, postController.remove);
 postRouter.get('/update/:id', isAuth, isAuthorPost, postController.updateForm);
 postRouter.post('/update', isAuth, isAuthorPost, postController.update);
+postRouter.post('/search', postController.search);
 
 
 module.exports = postRouter;

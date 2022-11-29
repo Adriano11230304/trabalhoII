@@ -5,12 +5,18 @@ const { validatePost } = require('./validators');
 class PostController{
 
     async list(req, res) {
+        let page = 0;
+        if(req.params.page){
+            page = (req.params.page - 1) * 5
+        }
         const posts = await Post.findAll({
             order: [
                 ['createdAt', 'DESC']
             ],
-            limit: 5
+            limit: 5,
+            offset: page
         });
+
         const totalPosts = await Post.findAll({
             order: [
                 ['createdAt', 'DESC']
@@ -104,6 +110,17 @@ class PostController{
         })
 
         res.render('posts/detail', { post, user, userCreate });
+    }
+
+    async search(req, res){
+        const posts = await Post.findAll({
+            where: {
+                title: req.body.search
+            }
+        })
+        const user = req.session.user;
+        const totalPosts = await Post.findAll();
+        res.render('posts/index', {posts, totalPosts, user})
     }
     
 };

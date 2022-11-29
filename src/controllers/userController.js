@@ -11,6 +11,7 @@ class UserController{
             ],
             limit: 5
         });
+        const totalPosts = await Post.findAll();
         const users = await User.findAll();
         let userExist = false;
         users.forEach(user => {
@@ -23,7 +24,7 @@ class UserController{
             const user = req.session.user;
             const msg = 'Usuário Logado!';
 
-            res.render('posts/index', { msg, user, posts });
+            res.render('posts/index', { msg, user, posts, totalPosts });
         }else{
             const msg = 'CPF ou password inválido!';
             res.render('users/login', { msg });
