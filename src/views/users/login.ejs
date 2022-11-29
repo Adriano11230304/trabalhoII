@@ -5,12 +5,11 @@
         <form class="py-3 col-4" action="/users/userAuth" method="post">
             <div class="form-group">
                 <label>CPF (Somente números)</label>
-                <input type="text" maxlength='11' class="form-control" name="cpf" placeholder="Escreva seu CPF">
+                <input type="text" minlength="11" maxlength='11' class="form-control" name="cpf" placeholder="Escreva seu CPF" required>
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" maxlength='10' id="password" class="form-control" name="password"
-                    placeholder="Escreva sua senha">
+                <input type="password" maxlength='30' id="password" class="form-control" name="password" required placeholder="Escreva sua senha">
             </div>
             <div class="form-group">
                 <input type="checkbox" name="mpassword" id="mpassword" onclick="mostrarPassword()">

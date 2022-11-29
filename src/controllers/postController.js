@@ -6,6 +6,8 @@ class PostController{
 
     async list(req, res) {
         const posts = await Post.findAll({
+            limit: 5,
+            offset: 0,
             order: [
                 ['createdAt', 'DESC']
             ]
