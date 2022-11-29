@@ -19,11 +19,21 @@ isAdmin = (req, res, next) => {
 }
 
 isAuthorPost = async (req, res, next) => {
-    const post = await Post.findOne({
-        where:{
-            id: req.params.id
-        }
-    })
+    let post;
+    if(req.params.id){
+        post = await Post.findOne({
+            where:{
+                id: req.params.id
+            }
+        })
+    }else if(req.body.id){
+        post = await Post.findOne({
+            where:{
+                id: req.body.id
+            }
+        })
+    }
+    
     if(post.UserCpf == req.session.user.cpf){
         next();
     }else{
