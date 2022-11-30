@@ -20,7 +20,8 @@ postRouter.post('/', isAuth, postController.add);
 postRouter.get('/delete/:id', isAuth, isAuthorPost, postController.remove);
 postRouter.get('/update/:id', isAuth, isAuthorPost, postController.updateForm);
 postRouter.post('/update', isAuth, isAuthorPost, postController.update);
-postRouter.post('/search', postController.search);
+postRouter.get('/search/:search', postController.search);
+postRouter.get('/search/', postController.search);
 
 
 module.exports = postRouter;

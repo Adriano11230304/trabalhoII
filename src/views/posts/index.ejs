@@ -9,13 +9,13 @@
 <%}%>   
 <div class="flex-center">
     <nav class="navbar navbar-light bg-light">
-        <form class="form-inline" method="POST" action="/posts/search" >
-          <input class="form-control mr-sm-2" type="search" name="search" placeholder="Procure um Post" aria-label="Search">
-          <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Procurar</button>
-        </form>
+        <div class="form-inline">
+          <input class="form-control mr-sm-2" type="search" name="search" placeholder="Procure um Post" id="search" aria-label="Search">
+          <button class="btn btn-outline-dark my-2 my-sm-0" onclick="return search()">Procurar</button>
+        </div>
       </nav>
 </div>
-<div class="container">
+<div class="container" id="container">
     <%if(posts.length==0){%>
         <h3 class="m-4">Nenhum Post encontrado!</h3>
     <%}else{%>
@@ -32,19 +32,19 @@
             </div>
             <div class="flex-container m-2">
                 <a class="btn btn-outline-dark m-2" href="/posts/update/<%=posts[i].id%>">
-                    <img src="/img/editar.png" title="Alterar o Post" width="25" height="25">
+                    <img src="/img/editar.png" title="Alterar Post" width="25" height="25">
                 </a>
                 <a class="btn btn-outline-dark m-2" href="/posts/delete/<%=posts[i].id%>">
-                    <img src="/img/excluir.png" title="Excluir o Post" width="25" height="25">
+                    <img src="/img/excluir.png" title="Excluir Post" width="25" height="25">
                 </a>
                 <a class="btn btn-outline-dark m-2" href="/posts/details/<%=posts[i].id%>">
-                    <img src="/img/visualizar.png" title="Visualizar o Post" width="25" height="25">
+                    <img src="/img/visualizar.png" title="Visualizar Post" width="25" height="25">
                 </a>
                 <a class="btn btn-outline-dark m-2" href="#">
                     <img src="/img/like1.png" title="Curtir Post" width="25" height="25">
                 </a>
                 <a class="btn btn-outline-dark m-2" href="#">
-                    <img src="/img/comentarios.png" title="Comentários do Post" width="25" height="25">
+                    <img src="/img/comentarios.png" title="Comentar Post" width="25" height="25">
                 </a>
             </div>
 

@@ -1,6 +1,7 @@
 const { Post } = require('../models/Post');
 const { User } = require('../models/User');
 const { validatePost } = require('./validators');
+const { Op } = require("sequelize");
 
 class PostController{
 
@@ -115,12 +116,26 @@ class PostController{
     async search(req, res){
         const posts = await Post.findAll({
             where: {
-                title: req.body.search
-            }
-        })
+                [Op.or]:[{
+                    title: {
+                        [Op.substring] : req.params.search
+                    }
+                },
+                {
+                    description:{
+                        [Op.substring] : req.params.search
+                    }
+                }]
+            },
+            order: [
+                ['createdAt', 'DESC']
+            ]
+        });
         const user = req.session.user;
         const totalPosts = await Post.findAll();
-        res.render('posts/index', {posts, totalPosts, user})
+        
+        res.json(posts);
+        // res.render('posts/index', {posts, totalPosts, user})
     }
     
 };
