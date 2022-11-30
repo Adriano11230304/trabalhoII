@@ -1,8 +1,9 @@
 async function search(){
     const search = document.querySelector('#search').value;
     const container = document.querySelector('#container');
+    const page = document.querySelector('#page');
+    page.innerHTML = '';
     const posts = await (await fetch('/posts/search/' + search)).json();
-    console.log(posts.length);
 
     if(posts.length > 0){
         let html = '';
