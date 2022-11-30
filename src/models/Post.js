@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require('../persistencia/configDB');
-const { User } = require('./User');
 
 const Post = sequelize.define('Post', {
     id:{

@@ -1,0 +1,18 @@
+<%-include('../components/header.ejs')%>
+
+    <div class="container">
+            <h3 class="m-2">
+                <%=post.title%>
+            </h3>
+            <h5 class="m-2"><%=post.description%></h5>
+        <form class="py-3 col-10" action="/posts" method="post">
+            <div class="form-group">
+                <label>Comentário</label>
+                <textarea class="form-control" name="comments" placeholder="Escreva o comentário aqui"></textarea>
+            </div>
+            <button class="btn btn-outline-primary">Adicionar Comentário</button>
+        </form>
+    </div>
+
+
+    <%-include('../components/footer.ejs')%>

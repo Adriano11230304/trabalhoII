@@ -43,7 +43,7 @@
                 <a class="btn btn-outline-dark m-2" href="#">
                     <img src="/img/like1.png" title="Curtir Post" width="25" height="25">
                 </a>
-                <a class="btn btn-outline-dark m-2" href="#">
+                <a class="btn btn-outline-dark m-2" href="/comments/addComment/<%=posts[i].id%>">
                     <img src="/img/comentarios.png" title="Comentar Post" width="25" height="25">
                 </a>
             </div>
@@ -62,86 +62,88 @@
     <%}%>
 </div>
 <br/>
-<div class="flex-center" id="page">
+<nav class="flex-center" id="page">
+    <ul class="pagination">
     <% if(totalPosts.length < 6){%>
-        <a class="m-2" href="/posts/1">1</a>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/1">1</a></li>
     <%}else if(totalPosts.length < 11){%>
-        <a class="m-2" href="/posts/1">1</a>
-        <a class="m-2" href="/posts/2">2</a>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/1">1</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/2">2</a></li>
     <%}else if(totalPosts.length < 16){%>
-        <a class="m-2" href="/posts/1">1</a>
-        <a class="m-2" href="/posts/2">2</a>
-        <a class="m-2" href="/posts/3">3</a>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/1">1</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/2">2</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/3">3</a></li>
     <%}else if(totalPosts.length < 21){%>
-        <a class="m-2" href="/posts/1">1</a>
-        <a class="m-2" href="/posts/2">2</a>
-        <a class="m-2" href="/posts/3">3</a>
-        <a class="m-2" href="/posts/4">4</a>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/1">1</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/2">2</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/3">3</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/4">4</a></li>
     <%}else if(totalPosts.length < 26){%>
-        <a class="m-2" href="/posts/1">1</a>
-        <a class="m-2" href="/posts/2">2</a>
-        <a class="m-2" href="/posts/3">3</a>
-        <a class="m-2" href="/posts/4">4</a>
-        <a class="m-2" href="/posts/5">5</a>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/1">1</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/2">2</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/3">3</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/4">4</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/5">5</a></li>
     <%}else if(totalPosts.length < 31){%>
-        <a class="m-2" href="/posts/1">1</a>
-        <a class="m-2" href="/posts/2">2</a>
-        <a class="m-2" href="/posts/3">3</a>
-        <a class="m-2" href="/posts/4">4</a>
-        <a class="m-2" href="/posts/5">5</a>
-        <a class="m-2" href="/posts/6">6</a>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/1">1</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/2">2</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/3">3</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/4">4</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/5">5</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/6">6</a></li>
     <%}else if(totalPosts.length < 36){%>
-        <a class="m-2" href="/posts/1">1</a>
-        <a class="m-2" href="/posts/2">2</a>
-        <a class="m-2" href="/posts/3">3</a>
-        <a class="m-2" href="/posts/4">4</a>
-        <a class="m-2" href="/posts/5">5</a>
-        <a class="m-2" href="/posts/6">6</a>
-        <a class="m-2" href="/posts/7">7</a>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/1">1</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/2">2</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/3">3</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/4">4</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/5">5</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/6">6</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/7">7</a></li>
     <%}else if(totalPosts.length < 41){%>
-        <a class="m-2" href="/posts/1">1</a>
-        <a class="m-2" href="/posts/2">2</a>
-        <a class="m-2" href="/posts/3">3</a>
-        <a class="m-2" href="/posts/4">4</a>
-        <a class="m-2" href="/posts/5">5</a>
-        <a class="m-2" href="/posts/6">6</a>
-        <a class="m-2" href="/posts/7">7</a>
-        <a class="m-2" href="/posts/8">8</a>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/1">1</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/2">2</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/3">3</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/4">4</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/5">5</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/6">6</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/7">7</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/8">8</a></li>
     <%}else if(totalPosts.length < 46){%>
-        <a class="m-2" href="/posts/1">1</a>
-        <a class="m-2" href="/posts/2">2</a>
-        <a class="m-2" href="/posts/3">3</a>
-        <a class="m-2" href="/posts/4">4</a>
-        <a class="m-2" href="/posts/5">5</a>
-        <a class="m-2" href="/posts/6">6</a>                                    
-        <a class="m-2" href="/posts/7">7</a>                                    
-        <a class="m-2" href="/posts/8">8</a>                                    
-        <a class="m-2" href="/posts/9">9</a>                                    
+        <li class="page-item"><a class="page-link text-dark" href="/posts/1">1</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/2">2</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/3">3</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/4">4</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/5">5</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/posts/6">6</a></li>                                    
+        <li class="page-item"><a class="page-link text-dark" href="/posts/7">7</a></li>                                    
+        <li class="page-item"><a class="page-link text-dark" href="/posts/8">8</a></li>                                    
+        <li class="page-item"><a class="page-link text-dark" href="/posts/9">9</a></li>                                    
     <%}else if(totalPosts.length < 51){%>                                        
-        <a class="m-2" href="/posts/1">1</a>                                        
-        <a class="m-2" href="/posts/2">2</a>                                        
-        <a class="m-2" href="/posts/3">3</a>                                        
-        <a class="m-2" href="/posts/4">4</a>                                        
-        <a class="m-2" href="/posts/5">5</a>                                        
-        <a class="m-2" href="/posts/6">6</a>                                        
-        <a class="m-2" href="/posts/7">7</a>                                        
-        <a class="m-2" href="/posts/8">8</a>                                        
-        <a class="m-2" href="/posts/9">9</a>                                        
-        <a class="m-2" href="/posts/10">10</a>                                        
+        <li class="page-item"><a class="page-link text-dark" href="/posts/1">1</a>  </li>                                      
+        <li class="page-item"><a class="page-link text-dark" href="/posts/2">2</a>  </li>                                      
+        <li class="page-item"><a class="page-link text-dark" href="/posts/3">3</a>  </li>                                      
+        <li class="page-item"><a class="page-link text-dark" href="/posts/4">4</a>  </li>                                      
+        <li class="page-item"><a class="page-link text-dark" href="/posts/5">5</a>  </li>                                      
+        <li class="page-item"><a class="page-link text-dark" href="/posts/6">6</a>  </li>                                      
+        <li class="page-item"><a class="page-link text-dark" href="/posts/7">7</a>  </li>                                      
+        <li class="page-item"><a class="page-link text-dark" href="/posts/8">8</a>  </li>                                      
+        <li class="page-item"><a class="page-link text-dark" href="/posts/9">9</a>  </li>                                      
+        <li class="page-item"><a class="page-link text-dark" href="/posts/10">10</a></li>                                        
     <%}else if(totalPosts.length < 56){%>                                            
-        <a class="m-2" href="/posts/1">1</a>                                            
-        <a class="m-2" href="/posts/2">2</a>                                            
-        <a class="m-2" href="/posts/3">3</a>                                            
-        <a class="m-2" href="/posts/4">4</a>                                            
-        <a class="m-2" href="/posts/5">5</a>                                            
-        <a class="m-2" href="/posts/6">6</a>                                            
-        <a class="m-2" href="/posts/7">7</a>                                            
-        <a class="m-2" href="/posts/8">8</a>                                            
-        <a class="m-2" href="/posts/9">9</a>                                            
-        <a class="m-2" href="/posts/10">10</a>                                            
-        <a class="m-2" href="/posts/11">11</a>                                            
+        <li class="page-item"><a class="page-link text-dark" href="/posts/1">1</a>  </li>                                          
+        <li class="page-item"><a class="page-link text-dark" href="/posts/2">2</a>  </li>                                          
+        <li class="page-item"><a class="page-link text-dark" href="/posts/3">3</a>  </li>                                          
+        <li class="page-item"><a class="page-link text-dark" href="/posts/4">4</a>  </li>                                          
+        <li class="page-item"><a class="page-link text-dark" href="/posts/5">5</a>  </li>                                          
+        <li class="page-item"><a class="page-link text-dark" href="/posts/6">6</a>  </li>                                          
+        <li class="page-item"><a class="page-link text-dark" href="/posts/7">7</a>  </li>                                          
+        <li class="page-item"><a class="page-link text-dark" href="/posts/8">8</a>  </li>                                          
+        <li class="page-item"><a class="page-link text-dark" href="/posts/9">9</a>  </li>                                          
+        <li class="page-item"><a class="page-link text-dark" href="/posts/10">10</a></li>                                            
+        <li class="page-item"><a class="page-link text-dark" href="/posts/11">11</a></li>                                            
     <%}%>
-</div>
+    </ul>
+    </nav>
 
 
 <%- include('../components/footer.ejs')%>
