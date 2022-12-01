@@ -22,6 +22,7 @@ postRouter.get('/update/:id', isAuth, isAuthorPost, postController.updateForm);
 postRouter.post('/update', isAuth, isAuthorPost, postController.update);
 postRouter.get('/search/:search', postController.search);
 postRouter.get('/search/', postController.search);
+postRouter.get('/like/:id', isAuth, postController.like);
 
 
 module.exports = postRouter;

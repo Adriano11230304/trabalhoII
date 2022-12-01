@@ -3,6 +3,7 @@ const { User } = require('../models/User');
 const { Comment } = require('../models/Comment');
 const { validatePost } = require('./validators');
 const { Op } = require("sequelize");
+const { Like } = require('../models/Like');
 
 class PostController{
 
@@ -25,11 +26,14 @@ class PostController{
             ]
         })
         const user = req.session.user;
+        console.log(user);
         let msg = req.session.msg;
         req.session.msg = undefined;
         let msgs = req.session.msgs;
         req.session.msgs = undefined;
-        res.render('posts/index', { posts, totalPosts, msg, user, msgs });        
+        const likes = await Like.findAll();
+        let d = 0;
+        res.render('posts/index', { posts, totalPosts, msg, user, msgs, likes, d });        
     }
 
     addPost(req, res){
@@ -153,6 +157,23 @@ class PostController{
         
         res.json(posts);
         // res.render('posts/index', {posts, totalPosts, user})
+    }
+
+    async like(req, res){
+        const userCpf = req.session.user.cpf;
+        const post = await Post.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+
+        await Like.create({
+            UserCpf: userCpf,
+            PostId: post.id,
+            like: true
+        })
+
+        res.redirect('/');
     }
     
 };
