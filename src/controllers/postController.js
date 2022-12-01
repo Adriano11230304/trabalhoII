@@ -1,5 +1,6 @@
 const { Post } = require('../models/Post');
 const { User } = require('../models/User');
+const { Comment } = require('../models/Comment');
 const { validatePost } = require('./validators');
 const { Op } = require("sequelize");
 
@@ -110,7 +111,23 @@ class PostController{
             }
         })
 
-        res.render('posts/detail', { post, user, userCreate });
+        const comments = await Comment.findAll({
+            where: {
+                PostId: req.params.id
+            }
+        })
+        const usersComments = [];
+        let userComment;
+        for(let i = 0; i < comments.length; i++){
+            userComment = await User.findOne({
+                where: {
+                    cpf: comments[i].UserCpf
+                }
+            })
+            usersComments.push(userComment.nome);
+        }
+
+        res.render('posts/detail', { post, user, userCreate, comments, usersComments });
     }
 
     async search(req, res){

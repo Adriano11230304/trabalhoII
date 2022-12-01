@@ -5,13 +5,18 @@
                 <%=post.title%>
             </h3>
             <h5 class="m-2"><%=post.description%></h5>
-        <form class="py-3 col-10" action="/posts" method="post">
-            <div class="form-group">
-                <label>Comentário</label>
-                <textarea class="form-control" name="comments" placeholder="Escreva o comentário aqui"></textarea>
-            </div>
-            <button class="btn btn-outline-primary">Adicionar Comentário</button>
-        </form>
+                <!--<img src="/img/users/undefined.png" height="50" width="50" class="rounded-circle" alt="Imagem do usuário">
+                <div>
+                    <p>Adriano</p>-->
+                    <form action="/comments/add" method="post">
+                        <input type="hidden" name="UserCpf" value="<%=user.cpf%>">
+                        <input type="hidden" name="Postid" value="<%=post.id%>">
+                        <div class="form-group">
+                            <textarea class="form-control" name="comments" placeholder="Escreva o seu comentário aqui" required></textarea>
+                        </div>
+                        <button class="btn btn-outline-primary">Adicionar Comentário</button>
+                    </form>
+           
     </div>
 
 

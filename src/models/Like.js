@@ -1,16 +1,15 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require('../persistencia/configDB');
 
-const Comment = sequelize.define('Comment', {
+const Like = sequelize.define('Like', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true
     },
-    text: DataTypes.STRING,
-    active: DataTypes.BOOLEAN,
+    like: DataTypes.BOOLEAN,
 }, {
     timestamps: true,
-    modelName: 'comments'
+    modelName: 'likes'
 });
 
-module.exports = { Comment };
+module.exports = { Like };
