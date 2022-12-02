@@ -26,14 +26,13 @@ class PostController{
             ]
         })
         const user = req.session.user;
-        console.log(user);
         let msg = req.session.msg;
         req.session.msg = undefined;
         let msgs = req.session.msgs;
         req.session.msgs = undefined;
         const likes = await Like.findAll();
-        let d = 0;
-        res.render('posts/index', { posts, totalPosts, msg, user, msgs, likes, d });        
+        let liked = 0;
+        res.render('posts/index', { posts, totalPosts, msg, user, msgs, likes, liked });        
     }
 
     addPost(req, res){
@@ -46,7 +45,6 @@ class PostController{
         if (req.body.url.includes('jpg') || req.body.url.includes('png') || req.body.url.includes('jpeg')){
             url = req.body.url;
         };
-        console.log(url);
         const { title, description} = req.body;
         const validatePosts = {title, description};
         const errors = validatePost(validatePosts);
@@ -152,11 +150,8 @@ class PostController{
                 ['createdAt', 'DESC']
             ]
         });
-        const user = req.session.user;
-        const totalPosts = await Post.findAll();
         
         res.json(posts);
-        // res.render('posts/index', {posts, totalPosts, user})
     }
 
     async like(req, res){
@@ -166,12 +161,26 @@ class PostController{
                 id: req.params.id
             }
         })
-
-        await Like.create({
-            UserCpf: userCpf,
-            PostId: post.id,
-            like: true
-        })
+        const likes = await Like.findAll();
+        let liked = 0;
+        for(let i = 0; i < likes.length; i++){
+            if (likes[i].UserCpf == userCpf && post.id == likes[i].PostId) {
+                liked++;
+                await Like.destroy({
+                    where:{
+                        id: likes[i].id
+                    }
+                })
+            }
+        }
+        if(liked == 0){
+            await Like.create({
+                UserCpf: userCpf,
+                PostId: post.id,
+                like: true
+            })
+        }
+        
 
         res.redirect('/');
     }

@@ -25,8 +25,9 @@ class UserController{
         if(userExist){
             const user = req.session.user;
             const msg = 'Usuário Logado!';
-    
-            res.render('posts/index', { msg, user, posts, totalPosts, likes });
+            let liked = 0;
+
+            res.render('posts/index', { msg, user, posts, totalPosts, likes, liked });
         }else{
             const msg = 'CPF ou password inválido!';
             res.render('users/login', { msg });
