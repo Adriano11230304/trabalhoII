@@ -5,6 +5,7 @@ const userRouter = require('./routes/usersRoutes');
 const session = require('express-session');
 const dbSync = require('./models/sync');
 const commentRouter = require('./routes/commentsRoutes');
+const likeRouter = require('./routes/likesRouter');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/posts', postRouter);
 app.use('/users', userRouter);
 app.use('/comments', commentRouter);
+app.use('/likes', likeRouter);
 
 app.use(express.static('src/public'));
 

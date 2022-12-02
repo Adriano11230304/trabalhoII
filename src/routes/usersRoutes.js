@@ -12,5 +12,6 @@ userRouter.post('/add', userController.addUser);
 userRouter.get('/logout', isAuth, userController.logout);
 userRouter.delete('/delete', isAuth, isAdmin, userController.delete);
 userRouter.get('/deletesuccess', isAuth, isAdmin, userController.deletesuccess);
+userRouter.get('/userLogin', userController.userLogin);
 
 module.exports = userRouter;

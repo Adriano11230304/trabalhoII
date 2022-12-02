@@ -4,7 +4,10 @@ async function search(){
     const page = document.querySelector('#page');
     page.innerHTML = '';
     const posts = await (await fetch('/posts/search/' + search)).json();
-
+    const likes = await (await fetch('/likes')).json();
+    const user = await(await fetch('/users/userLogin')).json();
+    console.log(likes);
+    console.log(user);
     if(posts.length > 0){
         let html = '';
         for(let i = 0; i < posts.length; i++) {
@@ -28,8 +31,21 @@ async function search(){
             html += "<a class='btn btn-outline-dark m-2' href='/posts/details/" + posts[i].id + "'>";
             html += "<img src='/img/visualizar.png' title='Visualizar Post' width='25' height='25'>";
             html += "</a>";
+            let liked = 0;
             html += "<a class='btn btn-outline-dark m-2' href='/posts/like/" + posts[i].id + "'>";
-            html += "<img src='/img/like1.png' title='Curtir Post' width='25' height='25'>";
+            for (let j = 0; j < likes.length; j++) {
+                        if (user) {
+                            if (posts[i].id == likes[j].PostId && user.cpf == likes[j].UserCpf) {
+                                liked = 1;
+                            }
+                        }
+                    }
+            if (liked == 1) {
+                html += "<img src='/img/like.png' title='Curtir Post' width='25' height='25'>";
+                liked = 0
+            }else{
+                html += "<img src='/img/like1.png' title='Curtir Post' width='25' height='25'>";
+            }
             html += "</a>";
             html += "<a class='btn btn-outline-dark m-2' href='/comments/addComment/" + posts[i].id + "'>";
             html += "<img src='/img/comentarios.png' title='Comentar Post' width='25' height='25'>";

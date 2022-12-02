@@ -116,6 +116,15 @@ class UserController{
         req.session.msg = undefined;
         res.render('users/login');
     }
+
+    userLogin(req, res){
+        if(req.session.user){
+            const user = req.session.user;
+            res.json(user);
+        }else{
+            res.json({});
+        }
+    }
 }
 
 module.exports = UserController;
