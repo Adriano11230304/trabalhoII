@@ -54,6 +54,11 @@
         <h5 class="font-weight-bold">Comentários do Post:</h5>
     <hr class="border border-dark border-2 opacity-50">
     <%for(let i = 0; i < comments.length; i++){%>
+        <div class="flex-end">
+            <a href="/comments/esconder/<%=comments[i].id%>">
+                <img src="/img/esconder.png" alt="Esconder comentário" title="Esconder comentário" width="20" height="20">
+            </a>
+        </div>
         <div class="flex-container">
             <img src="/img/users/undefined.png" height="50" width="50" class="rounded-circle" alt="Imagem do usuário">
             <div>
@@ -68,6 +73,12 @@
         </div>
         <hr class="border-dark"></hr>
     <%}%>
+    <%if(user.cpf == post.UserCpf){%>
+        <a href="/posts/details/commentsoff/<%=post.id%>">
+            <button class="btn btn-outline-dark">Visualizar comentários escondidos</button>
+        </a>
+    <%}%>
+    
     
 </div>
 

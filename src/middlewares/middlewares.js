@@ -37,7 +37,7 @@ isAuthorPost = async (req, res, next) => {
     if(post.UserCpf == req.session.user.cpf){
         next();
     }else{
-        req.session.msg = 'Você não poderá alterar ou excluir um Post que não é seu!';
+        req.session.msg = 'Funcionalidade liberada somente para o criador do Post!';
         res.redirect('/');
     }
 }

@@ -115,9 +115,11 @@ class PostController{
 
         const comments = await Comment.findAll({
             where: {
-                PostId: req.params.id
+                PostId: req.params.id,
+                active: true
             }
         })
+        console.log(comments);
         const usersComments = [];
         let userComment;
         for(let i = 0; i < comments.length; i++){
@@ -129,7 +131,10 @@ class PostController{
             usersComments.push(userComment.nome);
         }
 
-        res.render('posts/detail', { post, user, userCreate, comments, usersComments });
+        let msg = req.session.msg;
+        req.session.msg = undefined;
+
+        res.render('posts/detail', { post, user, userCreate, comments, usersComments, msg });
     }
 
     async search(req, res){

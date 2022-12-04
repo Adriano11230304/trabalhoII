@@ -6,8 +6,6 @@ async function search(){
     const posts = await (await fetch('/posts/search/' + search)).json();
     const likes = await (await fetch('/likes')).json();
     const user = await(await fetch('/users/userLogin')).json();
-    console.log(likes);
-    console.log(user);
     if(posts.length > 0){
         let html = '';
         for(let i = 0; i < posts.length; i++) {

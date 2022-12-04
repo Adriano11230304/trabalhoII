@@ -26,9 +26,33 @@ class CommentController {
     }
 
     async list(req, res){
-        const commentsAll = await Comment.findAll();
+        const commentsAll = await Comment.findAll({
+            where:{
+                active: true
+            }
+        });
 
         res.json(commentsAll);
+    }
+
+    async esconder(req, res){
+        await Comment.update({
+            active: false
+        },{
+            where: {
+                id: req.params.id
+            }
+        })
+        const comment = await Comment.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        console.log(comment);
+        let url = '/posts/details/' +  comment.PostId;
+        console.log(url);
+        req.session.msg = 'Comentário escondido com sucesso!'
+        res.redirect(url);
     }
 }
 
