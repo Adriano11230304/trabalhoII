@@ -14,6 +14,7 @@ postRouter.post('/', postController.add);
 postRouter.get('/:page', postController.list);*/
 postRouter.get('/add-post', isAuth, postController.addPost);
 postRouter.get('/details/:id', isAuth, postController.postDetails);
+postRouter.get('/details/commentsoff/:id', isAuth, isAuthorPost, postController.postDetailsHidden);
 postRouter.get('/', postController.list);
 postRouter.get('/:page', postController.list);
 postRouter.post('/', isAuth, postController.add);

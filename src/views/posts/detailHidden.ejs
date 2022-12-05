@@ -1,0 +1,86 @@
+<%if(locals.user){%>
+    <%if(locals.user.role=='admin' ){%>
+        <%- include('../components/headerAdmin.ejs')%>
+    <%}else{%>
+        <%- include('../components/headerLogado.ejs')%>
+    <%}%>
+<%}else{%>
+    <%- include('../components/header.ejs')%>
+<%}%>
+
+<div class="container">
+    <hr class="border border-dark border-2 opacity-50">
+        <h6 class="m-2">
+            <%=post.createdAt%>
+        </h6>
+    <hr class="border border-dark border-2 opacity-50">
+    <div class="flex-container m-2">
+        <h3>
+            <%=post.title%>
+        </h3>
+    </div>
+    <div class="flex-container m-2">
+        <a class="btn btn-outline-dark m-2" href="/posts/update/<%=post.id%>">
+            <img src="/img/editar.png" title="Alterar o Post" width="25" height="25">
+        </a>
+        <a class="btn btn-outline-dark m-2" href="/posts/delete/<%=post.id%>">
+            <img src="/img/excluir.png" title="Excluir o Post" width="25" height="25">
+        </a>
+        <a class="btn btn-outline-dark m-2" href="/posts/like/<%=post.id%>">
+            <img src="/img/like1.png" title="Curtir Post" width="25" height="25">
+        </a>
+        <a class="btn btn-outline-dark m-2" href="/comments/addComment/<%=post.id%>">
+            <img src="/img/comentarios.png" title="Comentários do Post" width="25" height="25">
+        </a>
+    </div>
+    <div class="flex-container m-2">
+        <h6 class="h5 text-justify">
+            <%=post.description%>
+        </h6>
+    </div>
+    <br/>
+    <div class="text-center">
+        <%if(post.imageURL){%>
+            <img src="<%=post.imageURL%>" alt="Imagem do Post" width="350" height="250">
+        <%}%>
+    </div>
+    <div class="flex-container m-2">
+        <p class="text-justify">
+            Post criado por <%=userCreate.nome%>
+        </p>
+    </div>
+    <br/>
+    <hr class="border border-dark border-2 opacity-50">
+        <h5 class="font-weight-bold">Comentários escondidos do Post:</h5>
+    <hr class="border border-dark border-2 opacity-50">
+    <%for(let i = 0; i < comments.length; i++){%>
+        <div class="flex-end">
+            <a href="/comments/mostrar/<%=comments[i].id%>">
+                <img src="/img/visualizar.png" alt="Mostrar comentário para todos" title="Mostrar comentário para todos" width="20" height="20">
+            </a>
+        </div>
+        <div class="flex-container">
+            <img src="/img/users/undefined.png" height="50" width="50" class="rounded-circle" alt="Imagem do usuário">
+            <div>
+                <h5 class="m-2">
+                    <%=usersComments[i]%>:
+                </h5>
+                <h5 class="m-2">
+                    <%=comments[i].text%>
+                </h5>
+            </div>
+            
+        </div>
+        <hr class="border-dark"></hr>
+    <%}%>
+    <%if(user.cpf == post.UserCpf){%>
+        <a href="/posts/details/<%=post.id%>">
+            <button class="btn btn-outline-dark">Voltar</button>
+        </a>
+    <%}%>
+    
+    
+</div>
+
+
+<%- include('../components/footer.ejs')%>

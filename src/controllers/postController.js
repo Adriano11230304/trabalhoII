@@ -137,6 +137,42 @@ class PostController{
         res.render('posts/detail', { post, user, userCreate, comments, usersComments, msg });
     }
 
+    async postDetailsHidden(req, res){
+        const post = await Post.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        const user = req.session.user;
+        const userCreate = await User.findOne({
+            where: {
+                cpf: post.UserCpf
+            }
+        })
+
+        const comments = await Comment.findAll({
+            where: {
+                PostId: req.params.id,
+                active: false
+            }
+        })
+        const usersComments = [];
+        let userComment;
+        for(let i = 0; i < comments.length; i++){
+            userComment = await User.findOne({
+                where: {
+                    cpf: comments[i].UserCpf
+                }
+            })
+            usersComments.push(userComment.nome);
+        }
+
+        let msg = req.session.msg;
+        req.session.msg = undefined;
+
+        res.render('posts/detailHidden', { post, user, userCreate, comments, usersComments, msg });
+    }
+
     async search(req, res){
         const posts = await Post.findAll({
             where: {

@@ -54,6 +54,26 @@ class CommentController {
         req.session.msg = 'Comentário escondido com sucesso!'
         res.redirect(url);
     }
+
+    async mostrar(req, res){
+        await Comment.update({
+            active: true
+        },{
+            where: {
+                id: req.params.id
+            }
+        })
+        const comment = await Comment.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        console.log(comment);
+        let url = '/posts/details/' +  comment.PostId;
+        console.log(url);
+        req.session.msg = 'Comentário ativado com sucesso!'
+        res.redirect(url);
+    }
 }
 
 module.exports = CommentController;

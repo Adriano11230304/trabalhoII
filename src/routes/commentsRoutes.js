@@ -9,6 +9,7 @@ const commentController = new CommentController;
 commentRouter.get('/addComment/:post', isAuth, commentController.addComment);
 commentRouter.post('/add', isAuth, commentController.add);
 commentRouter.get('/esconder/:id', isAuth, isAuthorPost, commentController.esconder);
+commentRouter.get('/mostrar/:id', isAuth, isAuthorPost, commentController.mostrar);
 commentRouter.get('/', commentController.list);
 
 module.exports = commentRouter;
