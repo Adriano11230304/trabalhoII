@@ -13,7 +13,5 @@ userRouter.get('/logout', isAuth, userController.logout);
 userRouter.delete('/delete', isAuth, isAdmin, userController.delete);
 userRouter.get('/deletesuccess', isAuth, isAdmin, userController.deletesuccess);
 userRouter.get('/userLogin', userController.userLogin);
-userRouter.get('/addImageForm', isAuth, userController.addImageForm);
-userRouter.post('/addImage', isAuth, userController.addImage);
 
 module.exports = userRouter;

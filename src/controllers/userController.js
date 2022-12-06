@@ -4,6 +4,7 @@ const { role } = require('./role');
 const { validate }  = require('./validators');
 const { Like } = require('../models/Like');
 const formidable = require('formidable');
+const fs = require('fs');
 
 class UserController{
     async userAuth(req, res) {
@@ -42,41 +43,56 @@ class UserController{
 
     async addUser(req, res){
         let permissao;
-        if(req.body.role){
-            if(req.body.role == 'admin'){
-                permissao = role.admin;
-            }else{
-                permissao = role.regular;    
+        const form = formidable({ multiples: false, uploadDir: 'src/public/img/users' });
+        form.parse(req, async (err, fields, files) => {
+            console.log(files);
+            if (fields.role) {
+                if (fields.role == 'admin') {
+                    permissao = role.admin;
+                } else {
+                    permissao = role.regular;
+                }
+            } else {
+                permissao = role.regular;
             }
-        }else{
-            permissao = role.regular;
-        }
-        console.log(req.body);
-        const { nome, password, email, cpf } = req.body;
-        const validateUser = {
-            nome, password, email, cpf
-        };
+            const image = files.image;
+            const path = image.filepath;
+            const nameImage = image.filepath.substring(73) + '.jpg';
+            /*fs.rename(path, path + '.jpg', err => {
+                if(err){
+                    console.log(err);
+                }
+            });*/
 
-        const errors = validate(validateUser);
-        if(errors){
-            const msgs = [];
-            errors.details.forEach(error => {
-                msgs.push(error.message);
-            })
-            req.session.msgs = msgs;
-            res.redirect('/posts');
-        }else{
-            await User.create({
-                cpf: cpf,
-                email: email,
-                nome: nome,
-                password: password,
-                role: permissao
-            });
-            req.session.msg = 'Usuário cadastrado!';
+            const { nome, password, email, cpf } = fields;
 
-            res.redirect('/posts');
-        }
+            const validateUser = {
+                nome, password, email, cpf
+            };
+
+            const errors = validate(validateUser);
+            if (errors) {
+                const msgs = [];
+                errors.details.forEach(error => {
+                    msgs.push(error.message);
+                })
+                req.session.msgs = msgs;
+                res.redirect('/posts');
+            } else {
+                await User.create({
+                    cpf: cpf,
+                    email: email,
+                    nome: nome,
+                    password: password,
+                    role: permissao,
+                    Imageurl: nameImage
+                });
+
+                req.session.msg = 'Usuário cadastrado!';
+
+                res.redirect('/posts');
+            }
+        });
     }
 
     logout(req, res){
@@ -88,14 +104,27 @@ class UserController{
     delete(req, res){
         const cpfs = req.body;
         cpfs.forEach(async cpf => {
-            const user = await User.destroy({
+            const user = await User.findOne({
+                where: {
+                    cpf: cpf
+                }
+            })
+            await User.destroy({
                 where:{
                     cpf: cpf
                 }
             })
-            console.log(user);
+            
+            const dir = __dirname.substring(0, 67) + 'public' + user.Imageurl;
+            console.log(dir);
+            fs.unlink(dir, err => {
+                if(err){
+                    console.log(err);
+                }
+            });
 
         })
+        
         
         res.end('ok');
     }
@@ -108,7 +137,9 @@ class UserController{
 
     async list(req, res){
         const users = await User.findAll();
-        
+        for(let i = 0; i < users.length; i++){
+            console.log(users[i].Imageurl);
+        }
         res.render('users/list', { users });
     }
 

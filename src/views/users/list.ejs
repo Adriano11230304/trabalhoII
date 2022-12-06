@@ -20,6 +20,7 @@
                         <th>Password</th>
                         <th>E-mail</th>
                         <th>Nome</th>
+                        <th>Foto</th>
                         <th>Permissão</th>
                     </tr>
                 </thead>
@@ -31,13 +32,19 @@
                                 <td><%=users[i].password%></td>
                                 <td><%=users[i].email%></td>
                                 <td><%=users[i].nome%></td>
+                                <%if(users[i].Imageurl){%>
+                                    <td><img src="<%=users[i].Imageurl%>" class="rounded-circle" alt="Imagem de Perfil do Usuário" height="50" width="50"></td>
+                                <%}else{%>
+                                    <td><img src="/img/users/undefined.png" class="rounded-circle" alt="Imagem de Perfil do Usuário" height="50" width="50"></td>
+                                <%}%>
+                                
                                 <td><%=users[i].role%></td>
                             </tr>
                         <%}%>
                 </tbody>
             </table>
         </div>
-    </div>    
+    </div>
 
     
 <%- include('../components/footer.ejs')%>
