@@ -5,6 +5,7 @@ const { validate }  = require('./validators');
 const { Like } = require('../models/Like');
 const formidable = require('formidable');
 const fs = require('fs');
+const dir = require('../dirname')
 
 class UserController{
     async userAuth(req, res) {
@@ -43,9 +44,27 @@ class UserController{
 
     async addUser(req, res){
         let permissao;
+        let nameImage;
         const form = formidable({ multiples: false, uploadDir: 'src/public/img/users' });
         form.parse(req, async (err, fields, files) => {
-            console.log(files);
+            if(files.image.originalFilename){
+                const image = files.image;
+                const path = image.filepath;
+                nameImage = '/img/users/' + image.newFilename + '.jpg';
+                fs.rename(path, path + '.jpg', err => {
+                    if(err){
+                        console.log(err);
+                    }
+                });
+            }else{
+                const diretorio = files.image.filepath;
+                nameImage = null;
+                fs.unlink(diretorio, err => {
+                    if(err){
+                        console.log(err);
+                    }
+                });
+            }
             if (fields.role) {
                 if (fields.role == 'admin') {
                     permissao = role.admin;
@@ -55,14 +74,6 @@ class UserController{
             } else {
                 permissao = role.regular;
             }
-            const image = files.image;
-            const path = image.filepath;
-            const nameImage = image.filepath.substring(73) + '.jpg';
-            /*fs.rename(path, path + '.jpg', err => {
-                if(err){
-                    console.log(err);
-                }
-            });*/
 
             const { nome, password, email, cpf } = fields;
 
@@ -93,6 +104,7 @@ class UserController{
                 res.redirect('/posts');
             }
         });
+        
     }
 
     logout(req, res){
@@ -115,13 +127,15 @@ class UserController{
                 }
             })
             
-            const dir = __dirname.substring(0, 67) + 'public' + user.Imageurl;
-            console.log(dir);
-            fs.unlink(dir, err => {
-                if(err){
-                    console.log(err);
-                }
-            });
+            if(user.Imageurl){
+                const diretorio = dir + '/public' + user.Imageurl;
+            
+                fs.unlink(diretorio, err => {
+                    if(err){
+                        console.log(err);
+                    }
+                })
+            }
 
         })
         
@@ -137,9 +151,6 @@ class UserController{
 
     async list(req, res){
         const users = await User.findAll();
-        for(let i = 0; i < users.length; i++){
-            console.log(users[i].Imageurl);
-        }
         res.render('users/list', { users });
     }
 
