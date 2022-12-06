@@ -68,3 +68,9 @@ async function search(){
     }
     
 }
+
+document.addEventListener('keydown', function(e){
+    if(e.key == 'Enter'){
+    document.querySelector('#btnSearch').click();
+    }
+});

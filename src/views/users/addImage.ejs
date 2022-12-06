@@ -1,0 +1,17 @@
+<%- include('../components/header.ejs')%>
+    <div class="container">
+        <h4 class="h4 m-2">Adicionar Imagem ao usuário:</h4>
+        <form class="py-3 col-5" action="/users/addImage" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Imagem</label>
+                <input type="file" class="form-control" name="image" accept="image/*">
+            </div>
+            <button class="btn btn-outline-dark" type="submit">Adicionar imagem</button>
+        </form>
+    </div>
+
+
+<div class="form-group">
+    <label>Imagem</label>
+    <input type="file" class="form-control" name="image" accept="image/*">
+</div>

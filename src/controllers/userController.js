@@ -3,6 +3,7 @@ const { Post } = require('../models/Post');
 const { role } = require('./role');
 const { validate }  = require('./validators');
 const { Like } = require('../models/Like');
+const formidable = require('formidable');
 
 class UserController{
     async userAuth(req, res) {
@@ -50,7 +51,7 @@ class UserController{
         }else{
             permissao = role.regular;
         }
-
+        console.log(req.body);
         const { nome, password, email, cpf } = req.body;
         const validateUser = {
             nome, password, email, cpf
@@ -124,6 +125,20 @@ class UserController{
         }else{
             res.json({});
         }
+    }
+
+    addImageForm(req, res){
+        res.render('users/addImage');
+    }
+
+    addImage(req, res){
+        const form = formidable({ multiples: false, uploadDir: 'src/public/img/users' });
+        form.parse(req, (err, fields, files) => {
+            console.log('fields:', fields);
+            console.log('files:', files);
+        });
+
+        res.json('Ok');
     }
 }
 
