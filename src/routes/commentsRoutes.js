@@ -1,5 +1,5 @@
 const express = require('express');
-const { isAuth, isAdmin, isAuthorPost } = require('../middlewares/middlewares');
+const { isAuth, isAdmin, isAuthorPost, isAuthorPostComments } = require('../middlewares/middlewares');
 
 const commentRouter = express.Router();
 

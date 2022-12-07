@@ -9,15 +9,7 @@ const dir = require('../dirname')
 
 class UserController{
     async userAuth(req, res) {
-        const posts = await Post.findAll({
-            order: [
-                ['createdAt', 'DESC']
-            ],
-            limit: 5
-        });
-        const totalPosts = await Post.findAll();
         const users = await User.findAll();
-        const likes = await Like.findAll();
         let userExist = false;
         users.forEach(user => {
             if (user.cpf == req.body.cpf && user.password == req.body.password) {
@@ -26,11 +18,8 @@ class UserController{
             }
         })
         if(userExist){
-            const user = req.session.user;
-            const msg = 'Usuário Logado!';
-            let liked = 0;
-
-            res.render('posts/index', { msg, user, posts, totalPosts, likes, liked });
+            req.session.msg = 'Usuário Logado com sucesso!';
+            res.redirect('/posts');
         }else{
             const msg = 'CPF ou password inválido!';
             res.render('users/login', { msg });

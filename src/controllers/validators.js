@@ -32,9 +32,9 @@ const validate = (user) => {
 }
 
 const schemaPost = Joi.object({
-    title: Joi.string().min(3).max(30).required().messages({
+    title: Joi.string().min(3).max(100).required().messages({
         "string.min": "Título deve ter pelo menos 3 caracteres",
-        "string.max": "Título deve ter no máximo 30 caracteres",
+        "string.max": "Título deve ter no máximo 100 caracteres",
         "string.empty": "Título não informado"
     }),
     description: Joi.string().min(3).required().messages({

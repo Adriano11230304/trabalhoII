@@ -27,7 +27,20 @@
             <img src="/img/excluir.png" title="Excluir o Post" width="25" height="25">
         </a>
         <a class="btn btn-outline-dark m-2" href="/posts/like/<%=post.id%>">
-            <img src="/img/like1.png" title="Curtir Post" width="25" height="25">
+            <%for(let j=0; j < likes.length; j++){%>
+                <%if(locals.user){%>
+                    <%if(post.id==likes[j].PostId && user.cpf==likes[j].UserCpf){%>
+                        <%liked=1%>
+                    <%}%>
+                <%}%>
+            <%}%>
+            <%if(liked==1){%>
+                <img src="/img/like.png" title="Curtir Post" width="25" height="25">
+                <%liked=0%>
+            <%}else{%>
+                <img src="/img/like1.png" title="Curtir Post" width="25" height="25">
+            <%}%>
+        
         </a>
         <a class="btn btn-outline-dark m-2" href="/comments/addComment/<%=post.id%>">
             <img src="/img/comentarios.png" title="Comentários do Post" width="25" height="25">
@@ -55,9 +68,11 @@
     <hr class="border border-dark border-2 opacity-50">
     <%for(let i = 0; i < comments.length; i++){%>
         <div class="flex-end">
-            <a href="/comments/esconder/<%=comments[i].id%>">
-                <img src="/img/esconder.png" alt="Esconder comentário" title="Esconder comentário" width="20" height="20">
-            </a>
+            <%if(user.cpf==post.UserCpf){%>
+                <a href="/comments/esconder/<%=comments[i].id%>">
+                    <img src="/img/esconder.png" alt="Esconder comentário" title="Esconder comentário" width="20" height="20">
+                </a>
+            <%}%>
         </div>
         <div class="flex-container">
             <%if(usersComments[i].Imageurl){%>

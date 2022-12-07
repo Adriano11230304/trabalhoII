@@ -66,4 +66,4 @@ isAuthorPostComments = async (req, res, next) => {
     }
 }
 
-module.exports = { isAuth, isAdmin, isAuthorPost };
+module.exports = { isAuth, isAdmin, isAuthorPost, isAuthorPostComments };

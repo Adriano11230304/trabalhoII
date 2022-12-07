@@ -32,7 +32,21 @@ class PostController{
         req.session.msgs = undefined;
         const likes = await Like.findAll();
         let liked = 0;
-        res.render('posts/index', { posts, totalPosts, msg, user, msgs, likes, liked });        
+        const usersPosts = [];
+        let userPost;
+        for(let i = 0; i < posts.length; i++){
+            userPost = await User.findOne({
+                where: {
+                    cpf: posts[i].UserCpf
+                }
+            })
+
+            usersPosts.push(userPost);
+        }
+
+        let image = 0;
+
+        res.render('posts/index', { posts, totalPosts, msg, user, msgs, likes, liked, usersPosts, image });        
     }
 
     addPost(req, res){
@@ -136,7 +150,11 @@ class PostController{
         let msg = req.session.msg;
         req.session.msg = undefined;
 
-        res.render('posts/detail', { post, user, userCreate, comments, usersComments, msg });
+        const likes = await Like.findAll();
+
+        let liked = 0;
+
+        res.render('posts/detail', { post, user, userCreate, comments, usersComments, msg, likes, liked });
     }
 
     async postDetailsHidden(req, res){

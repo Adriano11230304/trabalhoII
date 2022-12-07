@@ -21,8 +21,9 @@ class CommentController {
             UserCpf: UserCpf,
             PostId: Postid
         });
-        req.session.msg = 'Comentário adicionado!'
-        res.redirect('/');
+        req.session.msg = 'Comentário adicionado!';
+        let url = '/posts/details/' + Postid;
+        res.redirect(url);
     }
 
     async list(req, res){
