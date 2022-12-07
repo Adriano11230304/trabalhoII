@@ -34,7 +34,7 @@
         </a>
     </div>
     <div class="flex-container m-2">
-        <h6 class="h5 text-justify">
+        <h6 class="h6 text-justify">
             <%=post.description%>
         </h6>
     </div>
@@ -60,10 +60,15 @@
             </a>
         </div>
         <div class="flex-container">
-            <img src="/img/users/undefined.png" height="50" width="50" class="rounded-circle" alt="Imagem do usuário">
+            <%if(usersComments[i].Imageurl){%>
+                <img src="<%=usersComments[i].Imageurl%>" height="50" width="50" class="rounded-circle" alt="Imagem do usuário">
+            <%}else{%>
+                <img src="/img/users/undefined.png" height="50" width="50" class="rounded-circle" alt="Imagem do usuário">
+            <%}%>
+            
             <div>
                 <h5 class="m-2">
-                    <%=usersComments[i]%>:
+                    <%=usersComments[i].nome%> comentou:
                 </h5>
                 <h5 class="m-2">
                     <%=comments[i].text%>

@@ -119,7 +119,6 @@ class PostController{
                 active: true
             }
         })
-        console.log(comments);
         const usersComments = [];
         let userComment;
         for(let i = 0; i < comments.length; i++){
@@ -128,9 +127,12 @@ class PostController{
                     cpf: comments[i].UserCpf
                 }
             })
-            usersComments.push(userComment.nome);
+            usersComments.push(userComment);
         }
-
+        
+        for (let i = 0; i < usersComments.length; i++) {
+            console.log(usersComments[i].nome);
+        }
         let msg = req.session.msg;
         req.session.msg = undefined;
 
@@ -164,7 +166,7 @@ class PostController{
                     cpf: comments[i].UserCpf
                 }
             })
-            usersComments.push(userComment.nome);
+            usersComments.push(userComment);
         }
 
         let msg = req.session.msg;
