@@ -1,6 +1,6 @@
 const { User } = require('../models/User');
 const { Post } = require('../models/Post');
-const { role } = require('./role');
+const { role, dataFormated } = require('./role');
 const { validate }  = require('./validators');
 const { Like } = require('../models/Like');
 const formidable = require('formidable');
@@ -170,6 +170,42 @@ class UserController{
         });
 
         res.json('Ok');
+    }
+
+    async listPostsUser(req, res){
+        let page = 0;
+        if (req.params.page) {
+            page = (req.params.page - 1) * 5
+        }
+        const posts = await Post.findAll({
+            where: {
+                UserCpf: req.params.cpf
+            },
+            order: [
+                ['createdAt', 'DESC']
+            ],
+            limit: 5,
+            offset: page
+        });
+
+        const totalPosts = await Post.findAll({
+            where:{
+                UserCpf: req.params.cpf
+            },
+            order: [
+                ['createdAt', 'DESC']
+            ]
+        })
+        const user = req.session.user;
+        let msg = req.session.msg;
+        req.session.msg = undefined;
+        let msgs = req.session.msgs;
+        req.session.msgs = undefined;
+        const likes = await Like.findAll();
+        let liked = 0;
+        let data = dataFormated(posts);
+
+        res.render('users/listPosts', { posts, totalPosts, msg, user, msgs, likes, liked, data });
     }
 }
 

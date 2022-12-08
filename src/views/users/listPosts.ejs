@@ -1,0 +1,137 @@
+<%if(locals.user){%>
+    <%if(locals.user.role=='admin'){%>
+        <%-include('../components/headerAdmin.ejs')%>
+    <%}else{%>
+        <%-include('../components/headerLogado.ejs')%>
+    <%}%>
+<%}else{%>
+    <%- include('../components/header.ejs')%>
+<%}%>
+<div class="container" id="container">
+    <%if(posts.length==0){%>
+        <h3 class="m-4">Nenhum Post encontrado!</h3>
+    <%}else{%>
+        <%for(let i=0; i < posts.length; i++){%>
+            <hr class="border border-dark border-2 opacity-50">
+            <div class="flex-container">
+                <%if(user.Imageurl){%>
+                    <img src="<%=user.Imageurl%>" height="50" width="50" class="rounded-circle" alt="Imagem do usuário">
+                <%}else{%>
+                    <img src="/img/users/undefined.png" height="50" width="50" class="rounded-circle" alt="Imagem do usuário">
+                <%}%>
+                <h5 class="m-2">
+                    <%=user.nome%>
+                </h5>
+            </div>
+            <div class="flex-container m-2">
+                <h3>
+                    <%=posts[i].title%>
+                </h3>
+            </div>
+            <div class="flex-container m-2">
+                <a class="btn btn-outline-dark m-2" href="/posts/update/<%=posts[i].id%>"> 
+                    <img src="/img/editar.png" title="Alterar Post" width="25" height="25">
+                </a>
+                <a class="btn btn-outline-dark m-2" href="/posts/delete/<%=posts[i].id%>">
+                    <img src="/img/excluir.png" title="Excluir Post" width="25" height="25">
+                </a>
+                <a class="btn btn-outline-dark m-2" href="/posts/details/<%=posts[i].id%>">
+                    <img src="/img/visualizar.png" title="Visualizar Post" width="25" height="25">
+                </a>
+                <a class="btn btn-outline-dark m-2" href="/posts/like/<%=posts[i].id%>">
+                    <%for(let j=0; j < likes.length; j++){%>
+                        <%if(locals.user){%>
+                            <%if(posts[i].id==likes[j].PostId && user.cpf==likes[j].UserCpf){%>
+                                <%liked=1%>
+                            <%}%>
+                        <%}%>
+                    <%}%>
+                    <%if(liked==1){%>
+                        <img src="/img/like.png" title="Curtir Post" width="25" height="25">
+                        <%liked=0%>
+                    <%}else{%>
+                        <img src="/img/like1.png" title="Curtir Post" width="25" height="25">
+                    <%}%>
+                </a>
+                <a class="btn btn-outline-dark m-2" href="/comments/addComment/<%=posts[i].id%>">
+                    <img src="/img/comentarios.png" title="Comentar Post" width="25" height="25">
+                </a>
+            </div>
+            <div class="flex-container m-2">
+                <p class="text-justify">
+                    <%=posts[i].description%>
+                </p>
+            </div>
+            <div class="text-center">
+                <%if(posts[i].imageURL){%>
+                    <img src="<%=posts[i].imageURL%>" alt="Imagem do Post" width="350" height="250">
+                <%}%>
+            </div>
+            <p class="m-2">
+                Post criado em <%=data[i]%>
+            </p>
+        <%}%>
+    <%}%>
+</div>
+<br />
+<nav class="flex-center" id="page">
+    <ul class="pagination">
+        <%if(totalPosts.length < 6){%>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
+        <%}else if(totalPosts.length < 11){%>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
+        <%}else if(totalPosts.length < 16){%>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/3">3</a></li>
+        <%}else if(totalPosts.length < 21){%>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/3">3</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/4">4</a></li>
+        <%}else if(totalPosts.length < 26){%>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/3">3</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/4">4</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/5">5</a></li>
+        <%}else if(totalPosts.length < 31){%>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/3">3</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/4">4</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/5">5</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/6">6</a></li>
+        <%}else if(totalPosts.length < 36){%>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/3">3</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/4">4</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/5">5</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/6">6</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/7">7</a></li>
+        <%}else if(totalPosts.length < 41){%>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/3">3</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/4">4</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/5">5</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/6">6</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/7">7</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/8">8</a></li>
+        <%}else if(totalPosts.length < 46){%>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/3">3</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/4">4</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/5">5</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/6">6</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/7">7</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/8">8</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/9">9</a></li>
+        <%}%>
+    </ul>
+</nav>
+
+<%- include('../components/footer.ejs')%>

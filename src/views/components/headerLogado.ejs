@@ -17,8 +17,7 @@
                     <a class="nav-link" href="/users/login">Login</a>
                 </li>
                 <div class="dropdown m-1">
-                    <a class="dropdown-toggle nav-link" href="/posts" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a class="dropdown-toggle nav-link" href="/posts" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Posts
                     </a>
     
@@ -28,13 +27,15 @@
                     </div>
                 </div>
                 <li class="nav-item m-1">
-                    <a class="nav-link" href="/users/addImageForm">Adicionar Imagem ao Usuário</a>
+                    <a class="nav-link" href="/users/updateImage">Alterar sua Imagem</a>
+                </li>
+                <li class="nav-item m-1">
+                    <a class="nav-link" href="/users/<%=user.cpf%>">Visualizar seus Posts</a>
                 </li>
             </ul>
         </nav>
         <div class="ml-auto p-2 bd-highlight">
-            <a class="btn btn-outline-light" href="/users/logout"><img src="/img/logout.png" width="30px" height="25px"
-                    title="Sair do sistema"></a>
+            <a class="btn btn-outline-light" href="/users/logout"><img src="/img/logout.png" width="30px" height="25px" title="Sair do sistema"></a>
         </div>
     </header>
 

@@ -4,6 +4,7 @@ const { Comment } = require('../models/Comment');
 const { validatePost } = require('./validators');
 const { Op } = require("sequelize");
 const { Like } = require('../models/Like');
+const { dataFormated } = require('./role');
 
 class PostController{
 
@@ -46,7 +47,9 @@ class PostController{
 
         let image = 0;
 
-        res.render('posts/index', { posts, totalPosts, msg, user, msgs, likes, liked, usersPosts, image });        
+        let data = dataFormated(posts);
+
+        res.render('posts/index', { posts, totalPosts, msg, user, msgs, likes, liked, usersPosts, image, data });        
     }
 
     addPost(req, res){
@@ -241,7 +244,6 @@ class PostController{
                 like: true
             })
         }
-        
 
         res.redirect('/');
     }
