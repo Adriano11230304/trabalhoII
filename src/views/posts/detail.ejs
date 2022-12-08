@@ -10,10 +10,16 @@
 
 <div class="container">
     <hr class="border border-dark border-2 opacity-50">
+    <div class="flex-container">
         <h6 class="m-2">
-            <%=post.createdAt%>
+            <%if(userCreate.Imageurl){%>
+                <img src="<%=userCreate.Imageurl%>" height="50" width="50" class="rounded-circle" alt="Imagem do usuário">
+            <%}else{%>
+                <img src="/img/users/undefined.png" height="50" width="50" class="rounded-circle" alt="Imagem do usuário">
+            <%}%>
         </h6>
-    <hr class="border border-dark border-2 opacity-50">
+        <h5 class="m-2"><%=userCreate.nome%></h5>
+    </div>
     <div class="flex-container m-2">
         <h3>
             <%=post.title%>
@@ -59,7 +65,7 @@
     </div>
     <div class="flex-container m-2">
         <p class="text-justify">
-            Post criado por <%=userCreate.nome%>
+            Post criado em <%=data%>
         </p>
     </div>
     <br/>

@@ -157,7 +157,10 @@ class PostController{
 
         let liked = 0;
 
-        res.render('posts/detail', { post, user, userCreate, comments, usersComments, msg, likes, liked });
+        let data = dataFormated(post);
+        console.log(data);
+
+        res.render('posts/detail', { data, post, user, userCreate, comments, usersComments, msg, likes, liked });
     }
 
     async postDetailsHidden(req, res){
@@ -193,7 +196,10 @@ class PostController{
         let msg = req.session.msg;
         req.session.msg = undefined;
 
-        res.render('posts/detailHidden', { post, user, userCreate, comments, usersComments, msg });
+        let data = dataFormated(post);
+        console.log(data);
+
+        res.render('posts/detailHidden', { data, post, user, userCreate, comments, usersComments, msg });
     }
 
     async search(req, res){

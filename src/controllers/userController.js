@@ -140,7 +140,8 @@ class UserController{
 
     async list(req, res){
         const users = await User.findAll();
-        res.render('users/list', { users });
+        const user = req.session.user;
+        res.render('users/list', { users, user });
     }
 
     login(req, res) {

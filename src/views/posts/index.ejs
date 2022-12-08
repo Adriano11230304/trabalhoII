@@ -23,7 +23,7 @@
             <hr class="border border-dark border-2 opacity-50">
             <div class="flex-container">
                 <%for(let j = 0; j < usersPosts.length; j++){%>
-                    <%if(usersPosts[j].cpf == posts[i].UserCpf){%>
+                    <%if(usersPosts[j].cpf == posts[i].UserCpf && usersPosts[i].Imageurl){%>
                         <%image = 1;%>
                     <%}%>
                 <%}%>

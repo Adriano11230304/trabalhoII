@@ -13,10 +13,24 @@ const dataFormated = (posts) => {
 
     let mesesExtenso = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
-        
-    for (let i = 0; i < posts.length; i++) {
-        data = posts[i].createdAt.toString();
-        console.log(data);
+    if(posts.length > 0){
+        for (let i = 0; i < posts.length; i++) {
+            data = posts[i].createdAt.toString();
+            console.log(data);
+            ano = data.substring(11, 15);
+            mes = data.substring(4, 7);
+            for (let j = 0; j < meses.length; j++){
+                if(mes == meses[j]){
+                    mes = mesesExtenso[j];
+                }
+            }
+            dia = data.substring(8,10);
+            data = dia + ' de ' + mes + ' de ' + ano;
+            dataFormated.push(data);
+        }
+        return dataFormated;
+    }else{
+        data = posts.createdAt.toString();
         ano = data.substring(11, 15);
         mes = data.substring(4, 7);
         for (let j = 0; j < meses.length; j++){
@@ -26,10 +40,9 @@ const dataFormated = (posts) => {
         }
         dia = data.substring(8,10);
         data = dia + ' de ' + mes + ' de ' + ano;
-        dataFormated.push(data);
+        return data;
     }
-
-    return dataFormated;
+    
 }
 
 module.exports = { role, dataFormated }
