@@ -47,7 +47,10 @@ class PostController{
 
         let image = 0;
 
-        let data = dataFormated(posts);
+        let data = '';
+        if (posts.length > 0) {
+            data = dataFormated(posts);
+        }
 
         res.render('posts/index', { posts, totalPosts, msg, user, msgs, likes, liked, usersPosts, image, data });
     }
