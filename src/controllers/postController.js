@@ -4,7 +4,7 @@ const { Comment } = require('../models/Comment');
 const { validatePost } = require('./validators');
 const { Op } = require("sequelize");
 const { Like } = require('../models/Like');
-const { dataFormated } = require('./role');
+const { dataFormated } = require('./types');
 
 class PostController{
 
@@ -49,7 +49,7 @@ class PostController{
 
         let data = dataFormated(posts);
 
-        res.render('posts/index', { posts, totalPosts, msg, user, msgs, likes, liked, usersPosts, image, data });        
+        res.render('posts/index', { posts, totalPosts, msg, user, msgs, likes, liked, usersPosts, image, data });
     }
 
     addPost(req, res){
@@ -84,6 +84,16 @@ class PostController{
     }
 
     remove(req, res){
+        Comment.destroy({
+            where: {
+                PostId: req.params.id
+            }
+        })
+        Like.destroy({
+            where: {
+                PostId: req.params.id
+            }
+        })
         Post.destroy({
             where:{
                 id: req.params.id
@@ -99,8 +109,10 @@ class PostController{
                 id: req.params.id
             }
         });
+
+        const user = req.session.user;
         
-        res.render('posts/updateForm', { post });
+        res.render('posts/updateForm', { post, user });
     }
 
     async update(req,res){
@@ -197,9 +209,11 @@ class PostController{
         req.session.msg = undefined;
 
         let data = dataFormated(post);
-        console.log(data);
+        const likes = await Like.findAll();
 
-        res.render('posts/detailHidden', { data, post, user, userCreate, comments, usersComments, msg });
+        let liked = 0;
+
+        res.render('posts/detailHidden', { data, post, user, userCreate, comments, usersComments, msg, likes, liked });
     }
 
     async search(req, res){
@@ -207,12 +221,12 @@ class PostController{
             where: {
                 [Op.or]:[{
                     title: {
-                        [Op.substring] : req.params.search
+                        [Op.substring] : req.body.search
                     }
                 },
                 {
                     description:{
-                        [Op.substring] : req.params.search
+                        [Op.substring] : req.body.search
                     }
                 }]
             },
@@ -220,8 +234,35 @@ class PostController{
                 ['createdAt', 'DESC']
             ]
         });
+
+        const user = req.session.user;
+        let msg = req.session.msg;
+        req.session.msg = undefined;
+        let msgs = req.session.msgs;
+        req.session.msgs = undefined;
+        const likes = await Like.findAll();
+        let liked = 0;
+        const usersPosts = [];
+        let userPost;
+        for (let i = 0; i < posts.length; i++) {
+            userPost = await User.findOne({
+                where: {
+                    cpf: posts[i].UserCpf
+                }
+            })
+
+            usersPosts.push(userPost);
+        }
         
-        res.json(posts);
+        let image = 0;
+
+        let data = '';
+        if(posts.length > 0){
+            data = dataFormated(posts);
+        }
+        
+
+        res.render('posts/search', { posts, msg, user, msgs, likes, liked, usersPosts, image, data });
     }
 
     async like(req, res){

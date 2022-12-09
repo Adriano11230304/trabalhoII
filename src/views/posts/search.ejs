@@ -1,19 +1,20 @@
 <%if(locals.user){%>
-    <%if(locals.user.role == 'admin'){%>
+    <%if(locals.user.role=='admin' ){%>
         <%- include('../components/headerAdmin.ejs')%>
     <%}else{%>
         <%- include('../components/headerLogado.ejs')%>
     <%}%>
 <%}else{%>
     <%- include('../components/header.ejs')%>
-<%}%>   
+<%}%>
 <div class="flex-center">
     <nav class="navbar navbar-light bg-light">
         <form class="form-inline" action="/posts/search" method="post">
-          <input class="form-control mr-sm-2" type="search" name="search" placeholder="Procure um Post">
-          <button class="btn btn-outline-dark my-2 my-sm-0">Procurar</button>
+            <input class="form-control mr-sm-2" type="search" name="search"
+                placeholder="Procure um Post">
+            <button class="btn btn-outline-dark my-2 my-sm-0">Procurar</button>
         </form>
-      </nav>
+    </nav>
 </div>
 <div class="container" id="container">
     <%if(posts.length==0){%>
@@ -22,19 +23,21 @@
         <%for(let i=0; i < posts.length; i++){%>
             <hr class="border border-dark border-2 opacity-50">
             <div class="flex-container">
-                <%for(let j = 0; j < usersPosts.length; j++){%>
-                    <%if(usersPosts[j].cpf == posts[i].UserCpf && usersPosts[i].Imageurl){%>
-                        <%image = 1;%>
+                <%for(let j=0; j < usersPosts.length; j++){%>
+                    <%if(usersPosts[j].cpf==posts[i].UserCpf &&
+                        usersPosts[i].Imageurl){%>
+                        <%image=1;%>
                     <%}%>
                 <%}%>
-                <%if(image == 1){%>
+                <%if(image==1){%>
                     <img src="<%=usersPosts[i].Imageurl%>" height="50" width="50" class="rounded-circle" alt="Imagem do usuário">
-                    <%image = 0;%>
+                    <%image=0;%>
                 <%}else{%>
                     <img src="/img/users/undefined.png" height="50" width="50" class="rounded-circle" alt="Imagem do usuário">
                 <%}%>
-                
-                <h5 class="m-2"><%=usersPosts[i].nome%></h5>
+                <h5 class="m-2">
+                    <%=usersPosts[i].nome%>
+                </h5>
             </div>
             <div class="flex-container m-2">
                 <h3>
@@ -52,26 +55,24 @@
                     <img src="/img/visualizar.png" title="Visualizar Post" width="25" height="25">
                 </a>
                 <a class="btn btn-outline-dark m-2" href="/posts/like/<%=posts[i].id%>">
-                    <%for(let j = 0; j < likes.length; j++){%>
+                    <%for(let j=0; j < likes.length; j++){%>
                         <%if(locals.user){%>
-                            <%if(posts[i].id == likes[j].PostId && user.cpf == likes[j].UserCpf){%>
-                                <%liked = 1%>
+                            <%if(posts[i].id==likes[j].PostId && user.cpf==likes[j].UserCpf){%>
+                                <%liked=1%>
                             <%}%>
                         <%}%>
                     <%}%>
-                    <%if(liked == 1){%>
+                    <%if(liked==1){%>
                         <img src="/img/like.png" title="Curtir Post" width="25" height="25">
-                        <%liked = 0%>
+                        <%liked=0%>
                     <%}else{%>
                         <img src="/img/like1.png" title="Curtir Post" width="25" height="25">
                     <%}%>
-                    
                 </a>
                 <a class="btn btn-outline-dark m-2" href="/comments/addComment/<%=posts[i].id%>">
                     <img src="/img/comentarios.png" title="Comentar Post" width="25" height="25">
                 </a>
             </div>
-
             <div class="flex-container m-2">
                 <p class="text-justify">
                     <%=posts[i].description%>
@@ -79,52 +80,14 @@
             </div>
             <div class="text-center">
                 <%if(posts[i].imageURL){%>
-                    <img src="<%=posts[i].imageURL%>" alt="Imagem do Post" width="350" height="250">
-                <%}%>
+                    <img src="<%=posts[i].imageURL%>" alt="Imagem do Post"
+                        width="350" height="250">
+                    <%}%>
             </div>
             <p class="m-2">Post criado em <%=data[i]%></p>
         <%}%>
     <%}%>
 </div>
-<br/>
-<nav class="flex-center" id="page">
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link text-dark" href="/posts/1">1</a></li>
-        <%if(totalPosts.length > 5){%>
-            <li class="page-item"><a class="page-link text-dark" href="/posts/2">2</a></li>
-        <%}%>
-        <%if(totalPosts.length > 10){%>
-            <li class="page-item"><a class="page-link text-dark" href="/posts/3">3</a></li>
-        <%}%>
-        <%if(totalPosts.length > 15){%>
-            <li class="page-item"><a class="page-link text-dark" href="/posts/4">4</a></li>
-        <%}%>
-        <%if(totalPosts.length > 20){%>
-            <li class="page-item"><a class="page-link text-dark" href="/posts/5">5</a></li>
-        <%}%>
-        <%if(totalPosts.length > 25){%>
-            <li class="page-item"><a class="page-link text-dark" href="/posts/6">6</a></li>
-        <%}%>
-        <%if(totalPosts.length > 30){%>
-            <li class="page-item"><a class="page-link text-dark" href="/posts/7">7</a></li>
-        <%}%>
-        <%if(totalPosts.length > 35){%>
-            <li class="page-item"><a class="page-link text-dark" href="/posts/8">8</a></li>
-        <%}%>
-        <%if(totalPosts.length > 40){%>
-            <li class="page-item"><a class="page-link text-dark" href="/posts/9">9</a></li>
-        <%}%>
-        <%if(totalPosts.length > 45){%>
-            <li class="page-item"><a class="page-link text-dark" href="/posts/10">10</a></li>
-        <%}%>
-        <%if(totalPosts.length > 50){%>
-            <li class="page-item"><a class="page-link text-dark" href="/posts/11">11</a></li>
-        <%}%>
-        <%if(totalPosts.length > 55){%>
-            <li class="page-item"><a class="page-link text-dark" href="/posts/12">12</a></li>
-        <%}%>
-    </ul>
-    </nav>
-
+<br />
 
 <%- include('../components/footer.ejs')%>

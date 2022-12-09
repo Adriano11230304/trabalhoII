@@ -16,7 +16,6 @@ const dataFormated = (posts) => {
     if(posts.length > 0){
         for (let i = 0; i < posts.length; i++) {
             data = posts[i].createdAt.toString();
-            console.log(data);
             ano = data.substring(11, 15);
             mes = data.substring(4, 7);
             for (let j = 0; j < meses.length; j++){

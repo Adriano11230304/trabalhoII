@@ -1,0 +1,15 @@
+<%- include('../components/header.ejs')%>
+<div class="container">
+    <h4 class="h4 m-2">Alterar Imagem do usuário:</h4>
+    <form class="py-3 col-5" action="/users/updateImage" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Imagem(extensões Jpeg ou Jpg)</label>
+            <input type="file" class="form-control" name="image" accept="image/*">
+        </div>
+        <button class="btn btn-outline-dark" type="submit">Alterar Imagem</button>
+    </form>
+</div>
+
+
+
+<%- include('../components/footer.ejs')%>

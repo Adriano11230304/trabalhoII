@@ -1,22 +1,26 @@
 const { User } = require('../models/User');
 const { Post } = require('../models/Post');
-const { role, dataFormated } = require('./role');
+const { role, dataFormated } = require('./types');
 const { validate }  = require('./validators');
 const { Like } = require('../models/Like');
 const formidable = require('formidable');
 const fs = require('fs');
-const dir = require('../dirname')
+const dir = require('../dirname');
+const bcrypt = require('bcrypt');
 
 class UserController{
     async userAuth(req, res) {
         const users = await User.findAll();
         let userExist = false;
-        users.forEach(user => {
-            if (user.cpf == req.body.cpf && user.password == req.body.password) {
-                req.session.user = user;
+        let passwordCript;
+        for(let i = 0; i < users.length; i++){
+            passwordCript = await bcrypt.compare(req.body.password, users[i].password);
+            let cpfValid = users[i].cpf == req.body.cpf
+            if (passwordCript && users[i].cpf == req.body.cpf) {
+                req.session.user = users[i];
                 userExist = true;
             }
-        })
+        }
         if(userExist){
             req.session.msg = 'Usuário Logado com sucesso!';
             res.redirect('/posts');
@@ -79,11 +83,12 @@ class UserController{
                 req.session.msgs = msgs;
                 res.redirect('/posts');
             } else {
+                const passwordCript = await bcrypt.hash(password, 10);
                 await User.create({
                     cpf: cpf,
                     email: email,
                     nome: nome,
-                    password: password,
+                    password: passwordCript,
                     role: permissao,
                     Imageurl: nameImage
                 });
@@ -159,18 +164,65 @@ class UserController{
         }
     }
 
-    addImageForm(req, res){
+    async updateImageForm(req, res){
         res.render('users/addImage');
     }
 
-    addImage(req, res){
-        const form = formidable({ multiples: false, uploadDir: 'src/public/img/users' });
-        form.parse(req, (err, fields, files) => {
-            console.log('fields:', fields);
-            console.log('files:', files);
-        });
+    async updateImage(req, res){
+        const user = req.session.user;
 
-        res.json('Ok');
+        const form = formidable({ multiples: false, uploadDir: 'src/public/img/users' });
+        let nameImage;
+        form.parse(req, async (err, fields, files) => {
+            if (files.image.originalFilename) {
+                if (user.Imageurl){
+                    const diretorio = dir + '/public' + user.Imageurl;
+                    console.log('imagem antiga:', user.Imageurl);
+                    console.log('diretorio:',diretorio);
+                    fs.unlink(diretorio, err => {
+                        if (err) {
+                            console.log(err);
+                        }
+                    })
+                }
+
+                const image = files.image;
+                const path = image.filepath;
+                nameImage = '/img/users/' + image.newFilename + '.jpg';
+                fs.rename(path, path + '.jpg', err => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+                console.log('Nome Imagem nova:', nameImage);
+
+                await User.update({
+                    Imageurl: nameImage
+                }, {
+                    where: {
+                        cpf: user.cpf
+                    }
+                });
+
+                req.session.msg = 'Imagem alterada!';
+
+                res.redirect('/posts');
+            } else {
+                const diretorio = files.image.filepath;
+                nameImage = null;
+                fs.unlink(diretorio, err => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+
+                req.session.msg = 'Imagem no formato errado!';
+
+                res.redirect('/posts');
+
+            }
+            
+        });
     }
 
     async listPostsUser(req, res){

@@ -10,10 +10,18 @@
 
 <div class="container">
     <hr class="border border-dark border-2 opacity-50">
+    <div class="flex-container">
         <h6 class="m-2">
-            <%=post.createdAt%>
+            <%if(userCreate.Imageurl){%>
+                <img src="<%=userCreate.Imageurl%>" height="50" width="50" class="rounded-circle" alt="Imagem do usuário">
+            <%}else{%>
+                <img src="/img/users/undefined.png" height="50" width="50" class="rounded-circle" alt="Imagem do usuário">
+            <%}%>
         </h6>
-    <hr class="border border-dark border-2 opacity-50">
+        <h5 class="m-2">
+            <%=userCreate.nome%>
+        </h5>
+    </div>
     <div class="flex-container m-2">
         <h3>
             <%=post.title%>
@@ -27,7 +35,19 @@
             <img src="/img/excluir.png" title="Excluir o Post" width="25" height="25">
         </a>
         <a class="btn btn-outline-dark m-2" href="/posts/like/<%=post.id%>">
-            <img src="/img/like1.png" title="Curtir Post" width="25" height="25">
+            <%for(let j=0; j < likes.length; j++){%>
+                <%if(locals.user){%>
+                    <%if(post.id==likes[j].PostId && user.cpf==likes[j].UserCpf){%>
+                        <%liked=1%>
+                    <%}%>
+                <%}%>
+            <%}%>
+            <%if(liked==1){%>
+                <img src="/img/like.png" title="Curtir Post" width="25" height="25">
+                <%liked=0%>
+            <%}else{%>
+                <img src="/img/like1.png" title="Curtir Post" width="25" height="25">
+            <%}%>
         </a>
         <a class="btn btn-outline-dark m-2" href="/comments/addComment/<%=post.id%>">
             <img src="/img/comentarios.png" title="Comentários do Post" width="25" height="25">

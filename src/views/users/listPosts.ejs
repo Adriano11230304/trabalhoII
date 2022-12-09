@@ -76,60 +76,36 @@
 <br />
 <nav class="flex-center" id="page">
     <ul class="pagination">
-        <%if(totalPosts.length < 6){%>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
-        <%}else if(totalPosts.length < 11){%>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
+        <%if(totalPosts.length > 5){%>
             <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
-        <%}else if(totalPosts.length < 16){%>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
+        <%}%>
+        <%if(totalPosts.length > 10){%>
             <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/3">3</a></li>
-        <%}else if(totalPosts.length < 21){%>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/3">3</a></li>
+        <%}%>
+        <%if(totalPosts.length > 15){%>
             <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/4">4</a></li>
-        <%}else if(totalPosts.length < 26){%>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/3">3</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/4">4</a></li>
+        <%}%>
+        <%if(totalPosts.length > 20){%>
             <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/5">5</a></li>
-        <%}else if(totalPosts.length < 31){%>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/3">3</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/4">4</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/5">5</a></li>
+        <%}%>
+        <%if(totalPosts.length > 25){%>
             <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/6">6</a></li>
-        <%}else if(totalPosts.length < 36){%>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/3">3</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/4">4</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/5">5</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/6">6</a></li>
+        <%}%>
+        <%if(totalPosts.length > 30){%>
             <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/7">7</a></li>
-        <%}else if(totalPosts.length < 41){%>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/3">3</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/4">4</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/5">5</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/6">6</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/7">7</a></li>
+        <%}%>
+        <%if(totalPosts.length > 35){%>
             <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/8">8</a></li>
-        <%}else if(totalPosts.length < 46){%>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/1">1</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/2">2</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/3">3</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/4">4</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/5">5</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/6">6</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/7">7</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/8">8</a></li>
+        <%}%>
+        <%if(totalPosts.length> 40){%>
             <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/9">9</a></li>
+        <%}%>
+        <%if(totalPosts.length > 45){%>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/10">10</a></li>
+        <%}%>
+        <%if(totalPosts.length> 50){%>
+            <li class="page-item"><a class="page-link text-dark" href="/users/<%=user.cpf%>/11">11</a></li>
         <%}%>
     </ul>
 </nav>

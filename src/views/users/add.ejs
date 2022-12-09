@@ -1,7 +1,7 @@
 <%- include('../components/header.ejs')%>
     <div class="container">
         <h4 class="h4 m-2">Adicionar um novo usuário:</h4>
-        <form class="py-3 col-5" action="/users/add" method="post" enctype="multipart/form-data" onsubmit="return validation()">
+        <form class="py-3 col-5" action="/users/add" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label>CPF(Somente números)</label>
                 <input type="text" class="form-control" maxlength="11" name="cpf" id="cpf" required>
