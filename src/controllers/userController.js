@@ -140,7 +140,8 @@ class UserController{
     async deletesuccess(req, res){
         const msg = 'Usuários excluídos com sucesso!';
         const users = await User.findAll();
-        res.render('users/list', { msg, users });
+        const user = req.session.user;
+        res.render('users/list', { msg, users, user });
     }
 
     async list(req, res){
